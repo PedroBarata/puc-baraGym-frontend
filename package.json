@@ -1,5 +1,5 @@
 {
-  "name": "puc-bara-gym-frontend",
+  "name": "baragym",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
@@ -7,7 +7,7 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "heroku-postbuild": "ng build --prod"
+    "postinstall": "ng build"
   },
   "engines": {
     "node": "16.15.0",
