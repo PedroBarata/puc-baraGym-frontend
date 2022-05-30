@@ -1,6 +1,6 @@
 const express = require('express');
 const path = require('path');
-const nomeApp = process.env.npm_package_name;
+const nomeApp = 'puc-bara-gym-frontend';
 const app = express();
 
 app.use(express.static(`${__dirname}/dist/${nomeApp}`));
