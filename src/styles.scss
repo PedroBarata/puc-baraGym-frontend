@@ -3,27 +3,57 @@
 @import "../node_modules/bootstrap/scss/functions";
 @import "../node_modules/bootstrap/scss/variables";
 
-$primary:       $pink-600;
-$secondary:     $yellow-300;
-$success:       $green;
-$info:          $cyan;
-$warning:       $yellow;
-$danger:        $red;
-$light:         $gray-100;
-$dark:          $gray-900;
+.btn {
+    color: #fff !important;
+    border-radius: 100px !important;
+}
+
+.text-primary {
+    color: #EF798A !important;
+}
+
+$primary: #EF798A;
+$secondary: $yellow-300;
+$success: $green;
+$info: $cyan;
+$warning: $yellow;
+$danger: $red;
+$light: $gray-100;
+$dark: $gray-900;
 
 //futhermore it's necesary override the $theme-colors
 
 $theme-colors: (
-  "primary":    $primary,
-  "secondary":  $secondary,
-  "success":    $success,
-  "info":       $info,
-  "warning":    $warning,
-  "danger":     $danger,
-  "light":      $light,
-  "dark":       $dark
+    "primary": $primary,
+    "secondary": $secondary,
+    "success": $success,
+    "info": $info,
+    "warning": $warning,
+    "danger": $danger,
+    "light": $light,
+    "dark": $dark
 );
+
+$position-values: (
+  0: 0,
+  25: 25%,
+  30: 30%,
+  50: 50%,
+  80: 80%,
+  100: 100%
+);
+
+.form-control:focus {
+    border-color: $primary;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px $primary;
+  }
+
+$theme-colors-rgb: map-loop($theme-colors, to-rgb, "$value");
+$utilities-colors: map-merge($utilities-colors, $theme-colors-rgb);
+$utilities-text-colors: map-loop($utilities-colors, rgba-css-var, "$key", "text");
+$utilities-bg-colors: map-loop($utilities-colors, rgba-css-var, "$key", "bg");
+
+$component-active-bg: $primary;
 
 
 @import '../node_modules/bootstrap/scss/bootstrap.scss';
