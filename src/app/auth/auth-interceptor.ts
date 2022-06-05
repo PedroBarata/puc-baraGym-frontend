@@ -8,7 +8,7 @@ export class AuthInterceptor implements HttpInterceptor {
     constructor(private authService: AuthService) { }
 
     intercept(req: HttpRequest<any>, next: HttpHandler) {
-        const authToken = this.authService.getToken();
+        const authToken = this.authService.getAccessToken();
         /* Não é bom mexer com a requisição diretamente, para isso clonamos. */
         /* Adicionamos o header, com o mesmo nome que estamos esperando no backend: "authorization" */
         if (authToken) {
