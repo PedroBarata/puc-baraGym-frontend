@@ -1,4 +1,4 @@
-import { ErrorHandler, NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import {
   HttpClientModule,
@@ -9,7 +9,8 @@ import { AppComponent } from './app.component';
 import { AuthInterceptor } from './auth/auth-interceptor';
 import { AlertModule } from './common/components/alert/alert.module';
 import { ServerErrorInterceptor } from './error/server-error.interceptor';
-import { GlobalErrorHandler } from './global-error-handler';
+import { LoadButtonComponent } from './common/components/load-button/load-button.component';
+import { LoadButtonModule } from './common/components/load-button/load-button.module';
 
 @NgModule({
   declarations: [
@@ -19,11 +20,11 @@ import { GlobalErrorHandler } from './global-error-handler';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    AlertModule
+    AlertModule,
+    LoadButtonModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
-    { provide: ErrorHandler, useClass: GlobalErrorHandler },
     { provide: HTTP_INTERCEPTORS, useClass: ServerErrorInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]

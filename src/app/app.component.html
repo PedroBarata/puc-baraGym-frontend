@@ -1,6 +1,7 @@
+<body [ngClass]="router.url === ('/auth/login' || '/auth/criar-conta') ? 'intro-image':''">
 <app-alert></app-alert>
 <router-outlet></router-outlet>
-
+</body>
 <!-- <body>
   <div class="position-absolute top-5 start-0 translate-middle-y">
     <img src="../assets/icon.svg">

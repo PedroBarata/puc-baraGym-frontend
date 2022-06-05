@@ -5,6 +5,7 @@ import { CriarContaComponent } from './criar-conta/criar-conta.component';
 import { AuthRoutingModule } from './auth-routing.module';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { LoadButtonModule } from '../common/components/load-button/load-button.module';
 
 
 
@@ -17,7 +18,8 @@ import { HttpClientModule } from '@angular/common/http';
     CommonModule,
     FormsModule,
     AuthRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    LoadButtonModule
   ]
 })
 export class AuthModule { }
