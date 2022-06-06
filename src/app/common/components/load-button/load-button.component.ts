@@ -1,4 +1,5 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { LoadingService } from 'src/app/services/loading.service';
 
@@ -9,6 +10,7 @@ import { LoadingService } from 'src/app/services/loading.service';
 })
 export class LoadButtonComponent implements OnInit, OnDestroy {
   @Input() label: string = '';
+  @Input() form: NgForm | null = null;
   isLoading: boolean = false;
 
 

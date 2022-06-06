@@ -16,6 +16,10 @@ export class CriarContaComponent implements OnInit {
 
 
   onCriarConta(form: NgForm) {
+
+   console.log( form);
+
+
     if (form.invalid) {
       return;
     }
