@@ -1,1 +1,22 @@
-<p>criar-conta works!</p>
+<form (submit)="onCriarConta(criarContaForm)" #criarContaForm="ngForm" novalidate>
+  <div class="mb-3 px-5">
+    <label for="signInNomeInput" class="form-label">Nome</label>
+    <input name="nome" #nomeInput="ngModel" ngModel required nome type="text" class="form-control"
+      id="signInNomeInput" placeholder="Nome">
+  </div>
+
+  <div class="mb-3 px-5">
+    <label for="signInEmailInput" class="form-label">E-mail</label>
+    <input name="email" #emailInput="ngModel" ngModel required email type="email" class="form-control"
+      id="signInEmailInput" placeholder="teste@gmail.com">
+  </div>
+
+  <div class="mb-5 px-5">
+    <label for="signInSenhaInput" class="form-label">Senha</label>
+    <input type="password" class="form-control" id="signInSenhaInput" name="senha" #senhaInput="ngModel" ngModel
+      required minlength="3" placeholder="******">
+  </div>
+  <div class="mb-3 text-center">
+    <app-load-button [label]="'Criar conta'"></app-load-button>
+  </div>
+</form>

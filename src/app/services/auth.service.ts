@@ -7,6 +7,7 @@ import { JwtConstants } from "../common/constants/jwt-constants";
 import { JwtUtil } from "../common/utils/jwt-util";
 import { AuthData } from "../model/auth-data.model";
 import { JwtSub } from "../model/jwt-sub.model";
+import { NotificationService } from "./notification.service";
 
 
 const BACKEND_URL = environment.apiUrl;
@@ -20,7 +21,11 @@ export class AuthService {
   private _tokenTimer: any; //NodeJS.timeout
   private _authListener = new Subject<boolean>();
 
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(
+    private http: HttpClient,
+    private router: Router,
+    private notificationService: NotificationService
+  ) { }
 
   getAccessToken() {
     return this._accessToken;
@@ -58,7 +63,10 @@ export class AuthService {
     this.http
       .post(BACKEND_URL + "/usuarios", authData)
       .subscribe({
-        next: () => this.router.navigate(["/"]),
+        next: () => {
+          this.notificationService.success("Cadastro realizado com sucesso.");
+          this.router.navigate(["/"]);
+        },
         error: () => this._authListener.next(false)
       });
   };
@@ -90,7 +98,7 @@ export class AuthService {
         },
         error: (e) => {
           console.error(e);
-          
+
           this._authListener.next(false);
         }
       });

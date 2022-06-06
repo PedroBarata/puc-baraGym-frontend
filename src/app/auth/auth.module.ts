@@ -6,20 +6,18 @@ import { AuthRoutingModule } from './auth-routing.module';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { LoadButtonModule } from '../common/components/load-button/load-button.module';
+import { AuthComponent } from './auth.component';
 
 
 
 @NgModule({
-  declarations: [
-    LoginComponent,
-    CriarContaComponent
-  ],
+  declarations: [AuthComponent],
   imports: [
     CommonModule,
     FormsModule,
     AuthRoutingModule,
     HttpClientModule,
-    LoadButtonModule
+    LoadButtonModule,
   ]
 })
 export class AuthModule { }

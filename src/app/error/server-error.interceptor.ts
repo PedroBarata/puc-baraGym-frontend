@@ -15,15 +15,15 @@ export class ServerErrorInterceptor implements HttpInterceptor {
   constructor(
     private loadingService: LoadingService,
     private notificationService: NotificationService,
-    private logginService: LoggingService) {}
+    private loggingService: LoggingService) { }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-console.log('intercept');
+    console.log('intercept');
     this.loadingService.showLoading();
     return next.handle(request).pipe(
       retry(1),
       catchError((error: any) => {
-        this.logginService.logError(error);
+        this.loggingService.logError(error);
         this.loadingService.dismissLoading();
         if (error.status === 403) {
           this.notificationService.error('E-mail ou senha inválidos.');
