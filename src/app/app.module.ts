@@ -9,8 +9,6 @@ import { AppComponent } from './app.component';
 import { AuthInterceptor } from './auth/auth-interceptor';
 import { AlertModule } from './common/components/alert/alert.module';
 import { ServerErrorInterceptor } from './error/server-error.interceptor';
-import { LoadButtonComponent } from './common/components/load-button/load-button.component';
-import { LoadButtonModule } from './common/components/load-button/load-button.module';
 
 @NgModule({
   declarations: [
@@ -20,8 +18,7 @@ import { LoadButtonModule } from './common/components/load-button/load-button.mo
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    AlertModule,
-    LoadButtonModule
+    AlertModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },

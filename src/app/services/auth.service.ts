@@ -92,7 +92,7 @@ export class AuthService {
           this._estaAutenticado = true;
           this._authListener.next(true);
 
-          this._salvaAuthStorate(accessToken, this._jwtInfo);
+          this._salvaAuthStorage(accessToken, this._jwtInfo);
 
           this.router.navigate(["/"]);
         },
@@ -113,7 +113,7 @@ export class AuthService {
     clearTimeout(this._tokenTimer);
     this._limpaAuthStorage();
 
-    this.router.navigate(["/"]);
+    this.router.navigate(["/auth"]);
   }
 
   autoAuthUser() {
@@ -149,7 +149,7 @@ export class AuthService {
   /* Aqui é interessante passar um Date e não um número,
   que é um número relativo e não teremos uma ideia clara
   da data quando voltarmos no futuro */
-  private _salvaAuthStorate(accessToken: string, jwtSub: JwtSub) {
+  private _salvaAuthStorage(accessToken: string, jwtSub: JwtSub) {
     localStorage.setItem(JwtConstants.VAR_TOKEN, accessToken);
     localStorage.setItem(JwtConstants.VAR_EXP, new Date(jwtSub.exp * 1000).toISOString());
     localStorage.setItem(JwtConstants.VAR_MATRICULA, jwtSub.matricula);
@@ -162,6 +162,8 @@ export class AuthService {
     localStorage.removeItem(JwtConstants.VAR_TOKEN);
     localStorage.removeItem(JwtConstants.VAR_EXP);
     localStorage.removeItem(JwtConstants.VAR_MATRICULA);
+    localStorage.removeItem(JwtConstants.VAR_NOME);
+    localStorage.removeItem(JwtConstants.VAR_ROLE);
   }
 
   private _getAuthStorage() {
