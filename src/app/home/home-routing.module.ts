@@ -1,8 +1,10 @@
 import { NgModule } from "@angular/core";
 import { Route, RouterModule, Routes } from "@angular/router";
 import { AgendamentosComponent } from "./agendamentos/agendamentos.component";
+import { ListAulaAtividadeComponent } from "./aula-atividade/list-aula-atividade/list-aula-atividade.component";
 import { HomeComponent } from "./home.component";
 import { SeuPlanoComponent } from "./seu-plano/seu-plano.component";
+import { ListTurmaComponent } from "./turma/list-turma/list-turma.component";
 
 
 export const HOME_ROUTE: Route = {
@@ -18,6 +20,16 @@ export const HOME_ROUTE: Route = {
       path: 'agendamentos',
       component: AgendamentosComponent,
       loadChildren: () => import('./agendamentos/agendamentos.module').then(m => m.AgendamentosModule),
+    },
+    {
+      path: 'turmas',
+      component: ListTurmaComponent,
+      loadChildren: () => import('./turma/turma.module').then(m => m.TurmaModule),
+    },
+    {
+      path: 'aula-atividade',
+      component: ListAulaAtividadeComponent,
+      loadChildren: () => import('./aula-atividade/aula-atividade.module').then(m => m.AulaAtividadeModule),
     },
     { path: '', redirectTo: 'seu-plano', pathMatch: 'full' },
   ]

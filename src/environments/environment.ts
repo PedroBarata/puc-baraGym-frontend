@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  //apiUrl: "http://localhost:8080/api/v1"
-  apiUrl: "https://baragym-backend.herokuapp.com/api/v1"
+  apiUrl: "http://localhost:8080/api/v1"
+  //apiUrl: "https://baragym-backend.herokuapp.com/api/v1"
 };
 
 /*

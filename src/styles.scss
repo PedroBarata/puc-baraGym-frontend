@@ -58,7 +58,20 @@ $headings-font-family:        inter;
 $headings-font-style:         inter;
 $headings-font-weight:        500;
 $headings-line-height:        1.2;
-$headings-color:              null;
+
+$pagination-color:                  $primary;
+$pagination-focus-color:            $primary;
+$pagination-focus-bg:               $gray-200;
+$pagination-focus-box-shadow:       $input-btn-focus-box-shadow;
+$pagination-focus-outline:          0;
+
+$pagination-hover-color:            $primary;
+$pagination-hover-bg:               $gray-200;
+$pagination-hover-border-color:     $gray-300;
+
+$pagination-active-color:           $component-active-color;
+$pagination-active-bg:              $primary;
+$pagination-active-border-color:    $pagination-active-bg;
 
 $theme-colors-rgb: map-loop($theme-colors, to-rgb, "$value");
 $utilities-colors: map-merge($utilities-colors, $theme-colors-rgb);

@@ -10,8 +10,6 @@ import { JwtSub } from "../model/jwt-sub.model";
 import { NotificationService } from "./notification.service";
 
 
-const BACKEND_URL = environment.apiUrl;
-
 @Injectable({ providedIn: "root" })
 export class AuthService {
 
@@ -61,7 +59,7 @@ export class AuthService {
 
 
     this.http
-      .post(BACKEND_URL + "/usuarios", authData)
+      .post(environment.apiUrl + "/usuarios", authData)
       .subscribe({
         next: () => {
           this.notificationService.success("Cadastro realizado com sucesso.");
@@ -79,7 +77,7 @@ export class AuthService {
 
     this.http
       .post<{ accessToken: string }>(
-        BACKEND_URL + "/login",
+        environment.apiUrl + "/login",
         authData
       ).subscribe({
         next: (response) => {
