@@ -1,6 +1,5 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { Subscription } from "rxjs";
 import { environment } from "../../environments/environment";
 import { Atividade } from "../model/atividade.model";
 import { Page } from "../model/page.model";
@@ -10,7 +9,7 @@ import { UsuarioAtvidade } from "../model/usuario-atividade.model";
 export class AtividadeService {
 
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
   ) { }
 
   obterAtividadesDoUsuario(matricula: string)   {

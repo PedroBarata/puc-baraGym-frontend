@@ -8,26 +8,16 @@ import { LoadingService } from 'src/app/services/loading.service';
   templateUrl: './load-button.component.html',
   styleUrls: ['./load-button.component.scss']
 })
-export class LoadButtonComponent implements OnInit, OnDestroy {
+export class LoadButtonComponent implements OnInit {
   @Input() label: string = '';
   @Input() form: NgForm | null = null;
-  isLoading: boolean = false;
+  isLoading = this.loadingService.isLoading;
 
-
-  loadSubscription: Subscription = new Subscription;
 
   constructor(private loadingService: LoadingService) { }
 
   ngOnInit(): void {
-    this.loadSubscription = this.loadingService.onLoading()
-      .subscribe(isLoading => {
-        this.isLoading = isLoading;
-      })
   }
 
-  ngOnDestroy() {
-    // unsubscribe to avoid memory leaks
-    this.loadSubscription.unsubscribe();
-  }
 
 }

@@ -1,4 +1,4 @@
-<button type="submit" class="btn btn-primary px-4" [disabled]="isLoading || form?.invalid">
+<button type="submit" class="btn btn-primary px-4" [disabled]="(isLoading | async) || form?.invalid">
   {{label}}
-  <span class="spinner-border spinner-border-sm" *ngIf="isLoading" role="status" aria-hidden="true"></span>
+  <span class="spinner-border spinner-border-sm" *ngIf="isLoading | async" role="status" aria-hidden="true"></span>
 </button>

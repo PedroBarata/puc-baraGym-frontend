@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Subject, Subscription } from 'rxjs';
 import { JwtConstants } from '../common/constants/jwt-constants';
 import { RoleEnum } from '../model/jwt-sub.model';
 import { AuthService } from '../services/auth.service';
+import { LoadingService } from '../services/loading.service';
 
 @Component({
   selector: 'app-home',
@@ -11,7 +13,12 @@ import { AuthService } from '../services/auth.service';
 })
 export class HomeComponent implements OnInit {
 
-  constructor(private authService: AuthService, private router: Router) { }
+  isLoading: Subject<boolean> = this.loadingService.isLoading;
+
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private loadingService: LoadingService) { }
 
   ngOnInit(): void {
     if(this.ehAdmin()) {

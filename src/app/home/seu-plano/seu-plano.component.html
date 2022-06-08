@@ -6,7 +6,6 @@
     <button class="btn btn-primary px-2 align-self-center">Trocar de plano</button>
   </div>
 </div>
-
 <div class="row" *ngIf="atividadesDoPlano?.length === 0">
   <div class="col-12 text-center">
     <p style="font-size: 18px;">Você não está cadastrado em nenhum plano. <br />
@@ -25,7 +24,7 @@
             <div class="col-md-12">
               <div class="card mb-2 card-plano">
                 <div class="card-body">
-                  <h4 class="card-title text-primary mb-3 mt-1">{{atividade.nomeAtividade}}</h4>
+                  <h4 class="card-title text-primary mb-3">{{atividade.nomeAtividade}}</h4>
                   <p class="card-text text-plano">{{atividade.quantidadeSemana === 1? atividade.quantidadeSemana + '
                     dia/semana' : atividade.quantidadeSemana + ' dias/semana'}} </p>
                 </div>

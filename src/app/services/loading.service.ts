@@ -6,20 +6,16 @@ import { Observable, Subject } from 'rxjs';
 })
 export class LoadingService {
 
-  private subject = new Subject<boolean>();
+  isLoading = new Subject<boolean>();
 
-  // enable subscribing to alerts observable
-  onLoading(): Observable<boolean> {
-    return this.subject.asObservable();
-  }
 
   // main alert method
   showLoading() {
-    this.subject.next(true);
+    this.isLoading.next(true);
   }
 
   // clear alerts
   dismissLoading() {
-    this.subject.next(false);
+    this.isLoading.next(false);
   }
 }
