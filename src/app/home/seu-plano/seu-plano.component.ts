@@ -18,11 +18,13 @@ export class SeuPlanoComponent implements OnInit {
   atividadesDoPlano: UsuarioAtvidade[] = [];
 
   ngOnInit(): void {
+
+
     this.atividadeService
       .obterAtividadesDoUsuario(localStorage.getItem(JwtConstants.VAR_MATRICULA) as string).subscribe({
         next: (response) => {
           console.log(response);
-          return response;
+          this.atividadesDoPlano = response;
         },
         error: (e) => {
           console.error(e);

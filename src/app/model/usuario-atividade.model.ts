@@ -5,4 +5,5 @@ export interface UsuarioAtvidade {
   quantidadeSemana: number;
   vigenciaInicio: Date;
   vigenciaFim: Date;
+  valorTotal: number;
 }
