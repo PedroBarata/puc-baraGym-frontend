@@ -14,26 +14,37 @@
           [ngClass]="this.atividades!.content.indexOf(atividade) || this.atividades!.numberOfElements === 1? 'active' : ''">
           <div class="row text-center">
             <div class="col-10 text-center m-auto">
-              <div class="card mb-2 card-plano card-atividade">
-                <div class="card-body">
-                  <h4 class="card-title text-primary mb-3">{{atividade.nome}}</h4>
-                  <p class="card-text text-plano">{{atividade.descricao}} </p>
-                  <div class="my-5 px-5 text-start">
-                    <label for="qtdSemana" class="form-label">Quantidade de vezes na semana</label>
-                    <input type="number" class="form-control" id="qtdSemana" #vezesNaSemana
-                      placeholder="Informe a quantidade de vezes na semana">
-                    <div id="emailHelp" class="form-text">Mínimo de um dia (1) e máximo de seis (6)</div>
-                    <h5 class="text-center text-plano m-5">
-                      <span class="text-primary fw-bold">{{atividade.valorDia | currency}}</span>
-                      <span> mensal</span>
-                    </h5>
-                    <div class="center-block text-center m-auto">
-                      <button class="btn btn-primary px-2 mx-3"
-                        (click)="onAdicionarAtividade(atividade, vezesNaSemana.value)">Adicionar</button>
+              <form (submit)="onAdicionarAtividade(atividade, atividadeForm)" #atividadeForm="ngForm" novalidate>
+
+                <div class="card mb-2 card-plano card-atividade">
+                  <div class="card-body">
+                    <h4 class="card-title text-primary mb-3">{{atividade.nome}}</h4>
+                    <p class="card-text text-plano">{{atividade.descricao}} </p>
+
+                    <div class="my-5 px-5 text-start">
+                      <label for="qtdSemanaInput" class="form-label">Quantidade de vezes na semana</label>
+                      <input name="vezesNaSemana" type="number" class="form-control" id="qtdSemanaInput" required
+                        #vezesNaSemana="ngModel" ngModel min="1" max="6"
+                        placeholder="Informe a quantidade de vezes na semana"
+                        [ngClass]="vezesNaSemana.touched && vezesNaSemana.errors? 'is-invalid': ''">
+
+                      <div id="qtdSemanaHelp" class="form-text">Mínimo de um dia (1) e máximo de seis (6)</div>
+                      <div class="invalid-feedback">
+                        Insira um número entre um (1) e seis (6)
+                      </div>
+                      <h5 class="text-center text-plano m-5">
+                        <span class="text-primary fw-bold">{{atividade.valorDia | currency}}</span>
+                        <span> mensal</span>
+                      </h5>
+                      <div class="center-block text-center m-auto">
+                        <button class="btn btn-primary px-2 mx-3" type="submit"
+                          [disabled]="atividadeForm.invalid">Adicionar</button>
+                      </div>
                     </div>
                   </div>
+
                 </div>
-              </div>
+              </form>
             </div>
           </div>
         </div>
@@ -67,7 +78,8 @@
                   <p class="card-text text-plano ps-3">{{atividadeSelecionada.quantidadeSemana}} dias/semana</p>
                 </div>
                 <div class="col-auto my-auto">
-                    <i class="fa-solid fa-circle-xmark text-primary" style="zoom: 1.9;cursor: pointer;" (click)="onDeleteAtividadeSelecionada(atividadeSelecionada)"></i>
+                  <i class="fa-solid fa-circle-xmark text-primary" style="zoom: 1.9;cursor: pointer;"
+                    (click)="onDeleteAtividadeSelecionada(atividadeSelecionada)"></i>
                 </div>
               </div>
             </li>

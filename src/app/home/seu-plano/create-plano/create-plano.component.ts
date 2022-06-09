@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { Atividade } from 'src/app/model/atividade.model';
 import { Page } from 'src/app/model/page.model';
 import { AtividadeService } from 'src/app/services/atividade.service';
@@ -43,11 +44,11 @@ export class CreatePlanoComponent implements OnInit {
 
   }
 
-  onAdicionarAtividade(atividade: Atividade, qtdSemana: string) {
-    console.log(qtdSemana);
+  onAdicionarAtividade(atividade: Atividade, atividadeForm: NgForm) {
+    console.log(atividadeForm);
 
     const achouElemento = this.atividadesSelecionadas!.find(el => el.atividadeId === atividade.id);
-
+    const qtdSemana = atividadeForm.value.vezesNaSemana;
     if (achouElemento) {
       this.notificationService.warn(`A atividade '${achouElemento.nome}' já foi adicionada no seu resumo.`);
       return;
