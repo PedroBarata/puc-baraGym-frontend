@@ -48,10 +48,10 @@ export class CreatePlanoComponent implements OnInit {
 
     const achouElemento = this.atividadesSelecionadas!.find(el => el.atividadeId === atividade.id);
 
-    /* if (achouElemento) {
-      this.notificationService.error(`A atividade '${achouElemento.nome}' já foi adicionada no seu resumo.`);
+    if (achouElemento) {
+      this.notificationService.warn(`A atividade '${achouElemento.nome}' já foi adicionada no seu resumo.`);
       return;
-    } */
+    }
 
     this.atividadesSelecionadas!.push(
       {
