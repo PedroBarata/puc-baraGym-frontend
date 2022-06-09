@@ -1,0 +1,58 @@
+<div class="row ms-3 my-4">
+  <div class="col-auto">
+    <h1>Agendamentos</h1>
+  </div>
+  <div class="col-auto align-self-center" *ngIf="!agendamentos.empty">
+    <button class="btn btn-primary px-2 align-self-center" [routerLink]="['./novo-agendamento']">Alterar</button>
+  </div>
+</div>
+<div class="row" *ngIf="agendamentos.empty">
+  <div class="col-12 text-center">
+    <p style="font-size: 18px;">Você não possui nenhum agendamento das suas atividades.<br />
+      Que tal agendar algumas aulas?</p>
+    <button class="btn btn-primary px-2 mx-3 mt-5" [routerLink]="['./novo-agendamento']">Agendar</button>
+  </div>
+</div>
+
+<div class="row" *ngIf="!agendamentos.empty">
+  <div class="col-8 text-center m-auto">
+    <div id="carouselExampleControls" class="carousel p-4 slide vertical-center plano-card" data-bs-ride="carousel"
+      style="height: 55vh;">
+      <div class="carousel-inner">
+        <div class="carousel-item" *ngFor="let atividadeAgendamento of agendamentos.content"
+          [ngClass]="(this.agendamentos.content[0] === atividadeAgendamento || this.agendamentos.numberOfElements === 1)? 'active' : ''">
+          <div class="row  text-center">
+            <div class="col-12 text-center m-auto">
+
+              <div class="card mb-2 primary-card">
+                <div class="card-body" style="height: 49vh;">
+                  <h4 class="card-title text-primary mb-3">{{atividadeAgendamento.nomeAtividade}}</h4>
+                  <div style="height: 38vh; overflow-y: auto;">
+                    <div
+                      *ngFor="let agendamento of atividadeAgendamento.agendamentos">
+                      <h6 class="card-text m-0">{{agendamento.nomeDiaSemana}}</h6>
+                      <p class="card-text mb-3">
+                        <span>{{agendamento.horaInicio}}</span>
+                        -
+                        <span>{{agendamento.horaFim}}</span>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <button *ngIf="this.agendamentos.numberOfElements > 1" class="carousel-control-prev" type="button"
+        data-bs-target="#carouselExampleControls" data-bs-slide="prev" (click)="onPrevCarousel()">
+        <i class="fa-regular fa-circle-left" style="zoom: 1.9;"></i>
+      </button>
+      <button *ngIf="this.agendamentos.numberOfElements > 1" class="carousel-control-next" type="button"
+        data-bs-target="#carouselExampleControls" data-bs-slide="next" (click)="onNextCarousel()">
+        <i class="fa-regular fa-circle-right" style="zoom: 1.9;"></i>
+      </button>
+    </div>
+  </div>
+</div>

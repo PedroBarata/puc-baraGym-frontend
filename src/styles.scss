@@ -15,6 +15,11 @@
   color: $primary !important;
 }
 
+.primary-card {
+  border: 1px solid $primary !important;
+  border-radius: 0.25rem !important;
+}
+
 $btn-border-radius: 100px;
 //futhermore it's necesary override the $theme-colors
 
