@@ -10,3 +10,14 @@ export interface UsuarioAgendamento {
     horaFim: string;
   }[]
 }
+
+export interface Agendamento {
+  id: number;
+  alocacaoId: number;
+  atividadeId: number;
+  nomeAtividade: string;
+  nomeDiaSemana: string;
+  nomeTurma: string;
+  horaInicio: string;
+  horaFim: string;
+}

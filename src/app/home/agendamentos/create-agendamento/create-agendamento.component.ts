@@ -1,4 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { JwtConstants } from 'src/app/common/constants/jwt-constants';
+import { Page } from 'src/app/model/page.model';
+import { UsuarioAlocacaoAgendamento } from 'src/app/model/usuario-alocacao-agendamento.model';
+import { UsuarioAtividade } from 'src/app/model/usuario-atividade.model';
+import { AgendamentoService } from 'src/app/services/agendamento.service';
+import { AtividadeService } from 'src/app/services/atividade.service';
+import { NotificacaoService } from 'src/app/services/notification.service';
 
 @Component({
   selector: 'app-create-agendamento',
@@ -7,9 +14,101 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CreateAgendamentoComponent implements OnInit {
 
-  constructor() { }
+  usuarioAtividades: UsuarioAtividade[] = [];
+  alocacoes: Page<UsuarioAlocacaoAgendamento> = new Page<UsuarioAlocacaoAgendamento>();
+  selecionouAtividade: boolean = false;
+  atividadeSelecionada: UsuarioAtividade | null = null;
+  countAlocacoes = 0;
+
+  constructor(
+    private atividadeService: AtividadeService,
+    private agendamentoService: AgendamentoService,
+    private notificacaoService: NotificacaoService
+  ) { }
 
   ngOnInit(): void {
+    this.atividadeService.obterAtividadesDoUsuario(localStorage.getItem(JwtConstants.VAR_MATRICULA) as string)
+      .subscribe({
+        next: (response) => {
+          console.log(response);
+          this.usuarioAtividades = response;
+        },
+        error: (err) => {
+          console.error(err);
+        }
+      });
   }
 
+  onSelecionarAtividade(usuarioAtividadeSelecionada: UsuarioAtividade) {
+
+    this.atividadeService
+      .obterAlocacoesEAgendamentosDoUsuario(
+        localStorage.getItem(JwtConstants.VAR_MATRICULA) as string,
+        usuarioAtividadeSelecionada.id)
+      .subscribe({
+        next: (response) => {
+          console.log(response);
+          this.atividadeSelecionada = usuarioAtividadeSelecionada;
+          this.alocacoes = response;
+
+          this.countAlocacoes = this.alocacoes.content.filter(alocacao => alocacao.estaAgendado).length;
+          this.selecionouAtividade = true;
+        },
+        error: (err) => {
+          console.error(err);
+        }
+      });
+  }
+
+  onAlterarAgendamento(alocacao: UsuarioAlocacaoAgendamento) {
+    console.log(alocacao);
+    if (alocacao.estaAgendado) {
+      return this.removeAgendamento(alocacao);
+    }
+
+
+    if(this.atividadeSelecionada?.quantidadeSemana! === this.countAlocacoes) {
+      this.notificacaoService.warn("Você não pode exceder o limite semanal da atividade.");
+      return;
+    }
+
+    return this.fazAgendamento(alocacao);
+  }
+
+  fazAgendamento(alocacao: UsuarioAlocacaoAgendamento) {
+    this.agendamentoService
+      .cadastrarAgendamentoPorAlocacao(
+        localStorage.getItem(JwtConstants.VAR_MATRICULA) as string,
+        alocacao.alocacaoId)
+      .subscribe({
+        next: (response) => {
+          console.log(response);
+          alocacao.estaAgendado = true;
+          this.countAlocacoes++;
+          alocacao.agendamentoId = response.id;
+          this.notificacaoService.success("Agendamento feito com sucesso.");
+        },
+        error: (err) => {
+          console.error(err);
+        }
+      });
+  }
+
+  removeAgendamento(alocacao: UsuarioAlocacaoAgendamento) {
+    this.agendamentoService
+      .removerAgendamento(
+        localStorage.getItem(JwtConstants.VAR_MATRICULA) as string,
+        alocacao.agendamentoId)
+      .subscribe({
+        next: (response) => {
+          console.log(response);
+          alocacao.estaAgendado = false;
+          this.countAlocacoes--;
+          this.notificacaoService.success("Agendamento removido com sucesso.");
+        },
+        error: (err) => {
+          console.error(err);
+        }
+      });
+  }
 }

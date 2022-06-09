@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { JwtConstants } from 'src/app/common/constants/jwt-constants';
-import { UsuarioAtvidade } from 'src/app/model/usuario-atividade.model';
+import { UsuarioAtividade } from 'src/app/model/usuario-atividade.model';
 import { AtividadeService } from 'src/app/services/atividade.service';
 import { LoadingService } from 'src/app/services/loading.service';
 
@@ -17,7 +17,7 @@ export class ListPlanoComponent implements OnInit {
     private router: Router,
     private loadingService: LoadingService
     ) { }
-  atividadesDoPlano: UsuarioAtvidade[] = [];
+  atividadesDoPlano: UsuarioAtividade[] = [];
 
   ngOnInit(): void {
     this.atividadeService

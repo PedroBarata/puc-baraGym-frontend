@@ -12,7 +12,7 @@ import { AgendamentoService } from 'src/app/services/agendamento.service';
 export class ListAgendamentoComponent implements OnInit {
 
   agendamentos: Page<UsuarioAgendamento> = new Page<UsuarioAgendamento>();
-
+  agendamentoIndex: number = 0;
   constructor(private agendamentoService: AgendamentoService) { }
 
   ngOnInit(): void {
@@ -31,16 +31,23 @@ export class ListAgendamentoComponent implements OnInit {
   }
 
   onPrevCarousel() {
-    if(this.agendamentos.last) {
+    if (this.agendamentos.last) {
       return;
     }
 
     this.agendamentoService.obterAgendamentosDoUsuario(
       localStorage.getItem(JwtConstants.VAR_MATRICULA) as string,
+      { page: this.agendamentoIndex, pageSize: 2 }
     ).subscribe({
       next: (response) => {
-        console.log(response);
-        this.agendamentos = response;
+        this.agendamentos.content.push(...response.content);
+        this.agendamentos = {
+          ...response,
+          content: this.agendamentos.content,
+          numberOfElements: this.agendamentos.numberOfElements += response.numberOfElements
+        }
+
+        this.agendamentoIndex++;
       }
       ,
       error: (err) => {
@@ -50,16 +57,23 @@ export class ListAgendamentoComponent implements OnInit {
   }
 
   onNextCarousel() {
-    if(this.agendamentos.last) {
+    if (this.agendamentos.last) {
       return;
     }
 
     this.agendamentoService.obterAgendamentosDoUsuario(
       localStorage.getItem(JwtConstants.VAR_MATRICULA) as string,
+      { page: this.agendamentoIndex, pageSize: 2 }
     ).subscribe({
       next: (response) => {
-        console.log(response);
-        this.agendamentos = response;
+         this.agendamentos.content.push(...response.content);
+        this.agendamentos = {
+          ...response,
+          content: this.agendamentos.content,
+          numberOfElements: this.agendamentos.numberOfElements += response.numberOfElements
+        }
+
+        this.agendamentoIndex++;
       }
       ,
       error: (err) => {

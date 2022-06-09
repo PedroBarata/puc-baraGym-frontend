@@ -4,7 +4,8 @@ import { Observable } from "rxjs";
 import { environment } from "../../environments/environment";
 import { Atividade } from "../model/atividade.model";
 import { Page } from "../model/page.model";
-import { CreateUsuarioAtividade, UsuarioAtvidade } from "../model/usuario-atividade.model";
+import { UsuarioAlocacaoAgendamento } from "../model/usuario-alocacao-agendamento.model";
+import { CreateUsuarioAtividade, UsuarioAtividade } from "../model/usuario-atividade.model";
 
 @Injectable({ providedIn: "root" })
 export class AtividadeService {
@@ -16,7 +17,7 @@ export class AtividadeService {
   obterAtividadesDoUsuario(matricula: string) {
 
     return this.http
-      .get<UsuarioAtvidade[]>(
+      .get<UsuarioAtividade[]>(
         `${environment.apiUrl}/usuarios/${matricula}/atividades`
       );
   }
@@ -36,5 +37,20 @@ export class AtividadeService {
         `${environment.apiUrl}/usuarios/${matricula}/atividades`,
         createUsuarioAtividade
       );
+  }
+
+  obterAlocacoesEAgendamentosDoUsuario(matricula: string, usuarioAtividadeId: number, pagination?: { page: number, pageSize: number }) {
+
+    if (pagination) {
+      return this.http
+      .get<Page<UsuarioAlocacaoAgendamento>>(
+        `${environment.apiUrl}/usuarios/${matricula}/atividades/${usuarioAtividadeId}/alocacoes?page=${pagination.page}&size=${pagination.pageSize}`
+      )
+    }
+
+    return this.http
+    .get<Page<UsuarioAlocacaoAgendamento>>(
+      `${environment.apiUrl}/usuarios/${matricula}/atividades/${usuarioAtividadeId}/alocacoes`
+    )
   }
 }

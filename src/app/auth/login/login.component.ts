@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
-import { NotificationService } from 'src/app/services/notification.service';
+import { NotificacaoService } from 'src/app/services/notification.service';
 
 @Component({
   selector: 'app-login',
@@ -13,7 +13,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   isLoading = false;
   authStatusSub: Subscription | null = null;
 
-  constructor(public authService: AuthService, public notificationService: NotificationService) {}
+  constructor(public authService: AuthService, public notificationService: NotificacaoService) {}
 
   ngOnInit() {
   }

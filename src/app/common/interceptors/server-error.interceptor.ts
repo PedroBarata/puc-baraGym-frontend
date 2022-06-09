@@ -5,7 +5,7 @@ import {
 } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { retry, catchError, finalize, delay } from 'rxjs/operators';
-import { NotificationService } from '../../services/notification.service';
+import { NotificacaoService } from '../../services/notification.service';
 import { LoadingService } from '../../services/loading.service';
 import { LoggingService } from '../../services/logging.service';
 
@@ -13,7 +13,7 @@ import { LoggingService } from '../../services/logging.service';
 export class ServerErrorInterceptor implements HttpInterceptor {
 
   constructor(
-    private notificationService: NotificationService,
+    private notificationService: NotificacaoService,
     private loggingService: LoggingService) { }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {

@@ -5,7 +5,7 @@ import { Alert, AlertType } from '../model/alert.model';
 @Injectable({
   providedIn: 'root'
 })
-export class NotificationService {
+export class NotificacaoService {
 
   private subject = new Subject<Alert>();
   private defaultId = 'default-alert';

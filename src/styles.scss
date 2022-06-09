@@ -22,6 +22,21 @@
 
 $btn-border-radius: 100px;
 //futhermore it's necesary override the $theme-colors
+.dropdown-item.active, .dropdown-item:active {
+  color: #fff;
+  text-decoration: none;
+  background-color: $primary !important;
+}
+
+.form-check-input:checked {
+  background-color: $primary !important;
+  border-color: $primary !important;
+}
+
+.aviso-pop {
+  border: 1px solid $primary;
+  border-radius: 0.25rem;
+}
 
 $theme-colors: (
   "primary": $primary,

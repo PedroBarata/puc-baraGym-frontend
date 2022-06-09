@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { AuthService } from '../services/auth.service';
-import { NotificationService } from '../services/notification.service';
+import { NotificacaoService } from '../services/notification.service';
 
 @Component({
   selector: 'app-auth',
@@ -12,7 +12,7 @@ export class AuthComponent implements OnInit, OnDestroy {
   isLoading = false;
   authStatusSub: Subscription | null = null;
 
-  constructor(public authService: AuthService, public notificationService: NotificationService) {}
+  constructor(public authService: AuthService, public notificationService: NotificacaoService) {}
 
   ngOnInit(): void {
     this.authStatusSub = this.authService.getAuthListener().subscribe(

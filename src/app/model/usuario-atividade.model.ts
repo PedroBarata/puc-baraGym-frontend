@@ -1,4 +1,4 @@
-export interface UsuarioAtvidade {
+export interface UsuarioAtividade {
   id: number;
   atividadeId: number;
   nomeAtividade: string;

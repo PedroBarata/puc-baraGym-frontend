@@ -7,7 +7,7 @@ import { JwtConstants } from "../common/constants/jwt-constants";
 import { JwtUtil } from "../common/utils/jwt-util";
 import { AuthData } from "../model/auth-data.model";
 import { JwtSub } from "../model/jwt-sub.model";
-import { NotificationService } from "./notification.service";
+import { NotificacaoService } from "./notification.service";
 
 
 @Injectable({ providedIn: "root" })
@@ -22,7 +22,7 @@ export class AuthService {
   constructor(
     private http: HttpClient,
     private router: Router,
-    private notificationService: NotificationService
+    private notificationService: NotificacaoService
   ) { }
 
   getAccessToken() {

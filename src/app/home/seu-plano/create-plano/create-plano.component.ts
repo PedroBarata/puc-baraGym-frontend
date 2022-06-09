@@ -4,9 +4,9 @@ import { Router } from '@angular/router';
 import { JwtConstants } from 'src/app/common/constants/jwt-constants';
 import { Atividade } from 'src/app/model/atividade.model';
 import { Page } from 'src/app/model/page.model';
-import { CreateAtividade, CreateUsuarioAtividade } from 'src/app/model/usuario-atividade.model';
+import { CreateUsuarioAtividade } from 'src/app/model/usuario-atividade.model';
 import { AtividadeService } from 'src/app/services/atividade.service';
-import { NotificationService } from 'src/app/services/notification.service';
+import { NotificacaoService } from 'src/app/services/notification.service';
 
 interface AtividadeSelecionada {
   atividadeId: number,
@@ -23,21 +23,19 @@ export class CreatePlanoComponent implements OnInit {
 
   atividades: Page<Atividade> = new Page<Atividade>();
   valorTotal: number = 0;
-  atividadeIndex: number =2;
+  atividadeIndex: number =0;
   atividadesSelecionadas: AtividadeSelecionada[] | undefined;
 
 
   constructor(private atividadeService: AtividadeService,
-    private notificationService: NotificationService,
+    private notificationService: NotificacaoService,
     private router: Router) { }
 
   ngOnInit(): void {
     this.atividadesSelecionadas = [];
 
-    this.atividadeService.obterTodasAtividades(0, this.atividadeIndex).subscribe({
+    this.atividadeService.obterTodasAtividades(this.atividadeIndex, 2).subscribe({
       next: (response) => {
-        console.log(response);
-
         this.atividades = response;
         this.atividadeIndex++;
       },
@@ -76,12 +74,15 @@ export class CreatePlanoComponent implements OnInit {
       return;
     }
 
-    this.atividadeService.obterTodasAtividades(0, this.atividadeIndex).subscribe({
+    this.atividadeService.obterTodasAtividades(this.atividadeIndex, 2).subscribe({
       next: (response) => {
-        console.log(response);
-
-        this.atividades = response;
-        this.atividadeIndex--;
+        this.atividades.content.push(...response.content);
+        this.atividades = {
+          ...response,
+          content: this.atividades.content,
+          numberOfElements: this.atividades.numberOfElements +=response.numberOfElements
+        }
+        this.atividadeIndex++;
       },
       error: (err) => {
         console.error(err);
@@ -95,11 +96,14 @@ export class CreatePlanoComponent implements OnInit {
       return;
     }
 
-    this.atividadeService.obterTodasAtividades(0, this.atividadeIndex).subscribe({
+    this.atividadeService.obterTodasAtividades(this.atividadeIndex, 2).subscribe({
       next: (response) => {
-        console.log(response);
-
-        this.atividades = response;
+        this.atividades.content.push(...response.content);
+        this.atividades = {
+          ...response,
+          content: this.atividades.content,
+          numberOfElements: this.atividades.numberOfElements +=response.numberOfElements
+        }
         this.atividadeIndex++;
       },
       error: (err) => {
@@ -107,6 +111,7 @@ export class CreatePlanoComponent implements OnInit {
 
       }
     });
+    return;
   }
 
   onDeleteAtividadeSelecionada(atividadeSelecionada: AtividadeSelecionada) {

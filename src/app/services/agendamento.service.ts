@@ -2,7 +2,7 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { environment } from "../../environments/environment";
 import { Page } from "../model/page.model";
-import { UsuarioAgendamento } from "../model/usuario-agendamento.model";
+import { Agendamento, UsuarioAgendamento } from "../model/usuario-agendamento.model";
 
 @Injectable({ providedIn: "root" })
 export class AgendamentoService {
@@ -24,6 +24,23 @@ export class AgendamentoService {
         `${environment.apiUrl}/usuarios/${matricula}/agendamentos`
       );
   }
+
+
+  cadastrarAgendamentoPorAlocacao(matricula: string, alocacaoId: number) {
+    return this.http
+      .post<Agendamento>(
+        `${environment.apiUrl}/usuarios/${matricula}/agendamentos`,
+        { alocacaoId }
+      );
+  }
+
+  removerAgendamento(matricula: string, agendamentoId: number) {
+    return this.http
+      .delete(
+        `${environment.apiUrl}/usuarios/${matricula}/agendamentos/${agendamentoId}`,
+      );
+  }
+
 
   // obterTodasAtividades(page: number, pageSize: number) {
 
