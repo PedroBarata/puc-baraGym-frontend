@@ -1,0 +1,46 @@
+<div class="row ms-3 my-4">
+  <div class="col-auto">
+    <h1>Cadastrar Aula/Atividade</h1>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-10 m-auto">
+    <form (submit)="onCriarAtividade(criarAtividadeForm)" #criarAtividadeForm="ngForm" novalidate class="needs-validation">
+      <div class="mb-3 px-5">
+        <label for="atividadeNomeInput" class="form-label">Nome</label>
+        <input name="nome" required #nomeInput="ngModel" ngModel nome type="text" class="form-control"
+        [ngClass]="nomeInput.touched && nomeInput.errors? 'is-invalid': ''"
+          id="atividadeNomeInput" placeholder="Insira o nome da atividade">
+          <div class="invalid-feedback">
+            Preencha com um nome
+          </div>
+      </div>
+
+      <div class="mb-3 px-5 form-group">
+        <label for="atividadeDescricaoInput" class="form-label">Descrição</label>
+        <input name="descricao" #capacidadeInput="ngModel" ngModel capacidade type="text" class="form-control"
+        [ngClass]="capacidadeInput.touched && capacidadeInput.errors? 'is-invalid': ''"
+          id="atividadeCapacidadeInput" placeholder="Insira a descrição da atividade">
+          <div class="invalid-feedback">
+            Digite uma descrição
+          </div>
+      </div>
+
+      <div class="mb-3 px-5 form-group">
+        <label for="atividadeValorDiaInput" class="form-label">Valor/dia</label>
+        <input name="valorDia" #valorDiaInput="ngModel" ngModel required valorDia type="number" class="form-control"
+        [ngClass]="valorDiaInput.touched && valorDiaInput.errors? 'is-invalid': ''"
+          id="atividadeValorDiaInput" placeholder="Insira o valor, em reais, da atividade">
+          <div class="invalid-feedback">
+            Insira um valor numérico válido
+          </div>
+      </div>
+
+      <div class="mt-5 text-center">
+        <button type="button" class="btn btn-outline-primary px-2 mx-3" [routerLink]="['../']">Cancelar</button>
+        <app-load-button [form]="criarAtividadeForm" [label]="'Cadastrar'"></app-load-button>
+      </div>
+    </form>
+  </div>
+</div>

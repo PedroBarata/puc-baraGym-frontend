@@ -30,6 +30,20 @@ export class AtividadeService {
       );
   }
 
+  cadastrarAtividade(nome: string, descricao: string, valorDia: number) {
+    const data: Atividade = {
+      nome: nome,
+      descricao: descricao,
+      valorDia: valorDia
+    };
+
+    return this.http
+      .post<Atividade>(
+        `${environment.apiUrl}/atividades`,
+        data
+      );
+  }
+
   cadastrarUsuarioAtividade(matricula: string, createUsuarioAtividade: CreateUsuarioAtividade): Observable<Object> {
 
     return this.http
@@ -43,14 +57,14 @@ export class AtividadeService {
 
     if (pagination) {
       return this.http
-      .get<Page<UsuarioAlocacaoAgendamento>>(
-        `${environment.apiUrl}/usuarios/${matricula}/atividades/${usuarioAtividadeId}/alocacoes?page=${pagination.page}&size=${pagination.pageSize}`
-      )
+        .get<Page<UsuarioAlocacaoAgendamento>>(
+          `${environment.apiUrl}/usuarios/${matricula}/atividades/${usuarioAtividadeId}/alocacoes?page=${pagination.page}&size=${pagination.pageSize}`
+        )
     }
 
     return this.http
-    .get<Page<UsuarioAlocacaoAgendamento>>(
-      `${environment.apiUrl}/usuarios/${matricula}/atividades/${usuarioAtividadeId}/alocacoes`
-    )
+      .get<Page<UsuarioAlocacaoAgendamento>>(
+        `${environment.apiUrl}/usuarios/${matricula}/atividades/${usuarioAtividadeId}/alocacoes`
+      )
   }
 }

@@ -18,4 +18,17 @@ export class TurmaService {
         `${environment.apiUrl}/turmas`
       );
   }
+
+  cadastrarTurmas(nome: string, capacidade: number) {
+    const data: Turma = {
+      nome: nome,
+      capacidade: capacidade
+    }
+
+    return this.http
+      .post<Turma>(
+        `${environment.apiUrl}/turmas`,
+        data
+      );
+  }
 }

@@ -1,5 +1,5 @@
 export interface Turma {
-  id: number;
+  id?: number;
   nome: string;
   capacidade: number;
 }

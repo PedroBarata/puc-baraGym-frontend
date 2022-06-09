@@ -59,7 +59,7 @@ export class CreatePlanoComponent implements OnInit {
 
     this.atividadesSelecionadas!.push(
       {
-        atividadeId: atividade.id,
+        atividadeId: atividade.id!,
         nome: atividade.nome,
         quantidadeSemana: parseInt(qtdSemana)
       }
