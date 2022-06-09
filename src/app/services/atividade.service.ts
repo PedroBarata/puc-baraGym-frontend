@@ -22,11 +22,18 @@ export class AtividadeService {
       );
   }
 
-  obterTodasAtividades(page: number, pageSize: number) {
+  obterTodasAtividades(pagination?: { page: number, pageSize: number }) {
+
+    if (pagination) {
+      return this.http
+        .get<Page<Atividade>>(
+          `${environment.apiUrl}/atividades?page=${pagination.page}&size=${pagination.pageSize}`
+        );
+    }
 
     return this.http
       .get<Page<Atividade>>(
-        `${environment.apiUrl}/atividades?page=${page}&size=${pageSize}`
+        `${environment.apiUrl}/atividades?`
       );
   }
 

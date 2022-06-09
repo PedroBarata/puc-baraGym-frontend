@@ -34,7 +34,7 @@ export class CreatePlanoComponent implements OnInit {
   ngOnInit(): void {
     this.atividadesSelecionadas = [];
 
-    this.atividadeService.obterTodasAtividades(this.atividadeIndex, 2).subscribe({
+    this.atividadeService.obterTodasAtividades({page: this.atividadeIndex, pageSize: 2}).subscribe({
       next: (response) => {
         this.atividades = response;
         this.atividadeIndex++;
@@ -74,7 +74,7 @@ export class CreatePlanoComponent implements OnInit {
       return;
     }
 
-    this.atividadeService.obterTodasAtividades(this.atividadeIndex, 2).subscribe({
+    this.atividadeService.obterTodasAtividades({page: this.atividadeIndex, pageSize: 2}).subscribe({
       next: (response) => {
         this.atividades.content.push(...response.content);
         this.atividades = {
@@ -96,7 +96,7 @@ export class CreatePlanoComponent implements OnInit {
       return;
     }
 
-    this.atividadeService.obterTodasAtividades(this.atividadeIndex, 2).subscribe({
+    this.atividadeService.obterTodasAtividades({page: this.atividadeIndex, pageSize: 2}).subscribe({
       next: (response) => {
         this.atividades.content.push(...response.content);
         this.atividades = {

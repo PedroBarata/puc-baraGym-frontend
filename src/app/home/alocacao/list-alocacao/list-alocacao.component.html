@@ -1,0 +1,49 @@
+<div class="row ms-3 my-4">
+  <div class="col-auto">
+    <h1>Alocações</h1>
+  </div>
+  <div class="col-auto align-self-center">
+    <button class="btn btn-primary px-2 align-self-center" [routerLink]="['./nova-alocacao']">Cadastrar</button>
+  </div>
+</div>
+
+<div class="row">
+  <div class="container">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Nome</th>
+          <th>Turma</th>
+          <th>Início</th>
+          <th>Término</th>
+          <th>Dia da semana</th>
+        </tr>
+      </thead>
+      <tbody>
+
+        <tr *ngFor="let alocacao of alocacoes.content">
+          <td>{{alocacao.nomeAtividade}}</td>
+          <td>{{alocacao.nomeTurma}}</td>
+          <td>{{alocacao.horaInicio}}</td>
+          <td>{{alocacao.horaFim}}</td>
+          <td>{{alocacao.nomeDiaSemana}}</td>
+        </tr>
+      </tbody>
+    </table>
+    <nav aria-label="...">
+      <ul class="pagination justify-content-center">
+        <li class="page-item disabled">
+          <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Anterior</a>
+        </li>
+        <li class="page-item"><a class="page-link" href="#">1</a></li>
+        <li class="page-item active" aria-current="page">
+          <a class="page-link" href="#">2</a>
+        </li>
+        <li class="page-item"><a class="page-link" href="#">3</a></li>
+        <li class="page-item">
+          <a class="page-link" href="#">Próximo</a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</div>

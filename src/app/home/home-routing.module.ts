@@ -23,6 +23,10 @@ export const HOME_ROUTE: Route = {
       path: 'aula-atividade',
       loadChildren: () => import('./aula-atividade/aula-atividade.module').then(m => m.AulaAtividadeModule),
     },
+    {
+      path: 'alocacoes',
+      loadChildren: () => import('./alocacao/alocacao.module').then(m => m.AlocacaoModule),
+    },
     { path: '', redirectTo: 'seu-plano', pathMatch: 'full' },
   ]
 };

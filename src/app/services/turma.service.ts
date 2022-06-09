@@ -11,8 +11,14 @@ export class TurmaService {
     private http: HttpClient
   ) { }
 
-  obterTurmas() {
+  obterTurmas(pagination?: { page: number, pageSize: number }) {
 
+    if (pagination) {
+      return this.http
+        .get<Page<Turma>>(
+          `${environment.apiUrl}/turmas?page=${pagination.page}&size=${pagination.pageSize}`
+        );
+    }
     return this.http
       .get<Page<Turma>>(
         `${environment.apiUrl}/turmas`
