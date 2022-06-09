@@ -66,9 +66,11 @@ export class CreatePlanoComponent implements OnInit {
     console.log("digdon morre de ré", atividade);
   }
 
-  onDeleteAtividadeSelecionada(atividadeSelecionada: any) {
+  onDeleteAtividadeSelecionada(atividadeSelecionada: AtividadeSelecionada) {
+    const achouElemento = this.atividadesSelecionadas!.find(el => el.atividadeId === atividadeSelecionada.atividadeId);
+    const indexElemento = this.atividadesSelecionadas!.indexOf(achouElemento!);
+    this.atividadesSelecionadas!.splice(indexElemento, 1);
     console.log(atividadeSelecionada);
-    alert("Digdon morre de ré!");
   }
 
 }
