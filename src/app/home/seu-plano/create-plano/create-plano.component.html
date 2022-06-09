@@ -1,0 +1,94 @@
+<div class="row ms-3 my-4">
+  <div class="col-auto">
+    <h1>Seu plano personalizado</h1>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-7 m-4">
+    <h2>Atividades</h2>
+    <div id="carouselExampleControls" class="carousel slide p-4 plano-card" data-bs-ride="carousel"
+      style="height: 55vh;">
+      <div class="carousel-inner">
+        <div class="carousel-item" *ngFor="let atividade of atividades!.content"
+          [ngClass]="this.atividades!.content.indexOf(atividade) || this.atividades!.numberOfElements === 1? 'active' : ''">
+          <div class="row text-center">
+            <div class="col-10 text-center m-auto">
+              <div class="card mb-2 card-plano card-atividade">
+                <div class="card-body">
+                  <h4 class="card-title text-primary mb-3">{{atividade.nome}}</h4>
+                  <p class="card-text text-plano">{{atividade.descricao}} </p>
+                  <div class="my-5 px-5 text-start">
+                    <label for="qtdSemana" class="form-label">Quantidade de vezes na semana</label>
+                    <input type="number" class="form-control" id="qtdSemana" #vezesNaSemana
+                      placeholder="Informe a quantidade de vezes na semana">
+                    <div id="emailHelp" class="form-text">Mínimo de um dia (1) e máximo de seis (6)</div>
+                    <h5 class="text-center text-plano m-5">
+                      <span class="text-primary fw-bold">{{atividade.valorDia | currency}}</span>
+                      <span> mensal</span>
+                    </h5>
+                    <div class="center-block text-center m-auto">
+                      <button class="btn btn-primary px-2 mx-3"
+                        (click)="onAdicionarAtividade(atividade, vezesNaSemana.value)">Adicionar</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <button *ngIf="this.atividades!.numberOfElements > 1" class="carousel-control-prev" type="button"
+        data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+        <i class="fa-regular fa-circle-left" style="zoom: 1.9;"></i>
+      </button>
+      <button *ngIf="this.atividades!.numberOfElements > 1" class="carousel-control-next" type="button"
+        data-bs-target="#carouselExampleControls" data-bs-slide="next">
+        <i class="fa-regular fa-circle-right" style="zoom: 1.9;"></i>
+      </button>
+    </div>
+  </div>
+
+
+
+
+
+  <div class="col-4 m-4">
+    <h2>Resumo</h2>
+    <div class="card mb-2 plano-card" style="height: 55vh;">
+      <h4 class="m-auto my-3">Atividades</h4>
+      <div class="card-body p-0 summary-card">
+        <div style="height: 38vh; overflow-y: auto;">
+          <ul class="list-group list-group-striped list-group-hover">
+            <li class="list-group-item" *ngFor="let atividadeSelecionada of atividadesSelecionadas!">
+              <div class="row m-0">
+                <div class="col-auto me-auto">
+                  <h4 class="card-title text-primary">{{atividadeSelecionada.nome}}</h4>
+                  <p class="card-text text-plano ps-3">{{atividadeSelecionada.quantidadeSemana}} dias/semana</p>
+                </div>
+                <div class="col-auto my-auto">
+                    <i class="fa-solid fa-circle-xmark text-primary" style="zoom: 1.9;cursor: pointer;" (click)="onDeleteAtividadeSelecionada(atividadeSelecionada)"></i>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="my-3">
+        <h5 class="text-plano text-center fw-bold">Total</h5>
+        <p class="text-plano text-center">
+          <span class="text-primary fw-bold">{{valorTotal | currency}}</span>
+          <span> mensal</span>
+        </p>
+      </div>
+
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="center-block text-center m-auto mt-3">
+    <button class="btn btn-primary px-2 mx-3">Cancelar</button>
+    <button class="btn btn-primary px-2 mx-3">Adicionar</button>
+  </div>
+
+</div>

@@ -38,4 +38,7 @@ export class HomeComponent implements OnInit {
     return localStorage.getItem(JwtConstants.VAR_NOME);
   }
 
+  ehRotaCriacaoUsuario()  {
+    return this.router.url.includes('novo');
+  }
 }

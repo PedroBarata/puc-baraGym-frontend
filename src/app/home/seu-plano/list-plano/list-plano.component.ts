@@ -6,11 +6,11 @@ import { AtividadeService } from 'src/app/services/atividade.service';
 import { LoadingService } from 'src/app/services/loading.service';
 
 @Component({
-  selector: 'app-seu-plano',
-  templateUrl: './seu-plano.component.html',
-  styleUrls: ['./seu-plano.component.scss']
+  selector: 'app-list-plano',
+  templateUrl: './list-plano.component.html',
+  styleUrls: ['./list-plano.component.scss']
 })
-export class SeuPlanoComponent implements OnInit {
+export class ListPlanoComponent implements OnInit {
 
   constructor(
     private atividadeService: AtividadeService,
@@ -30,10 +30,6 @@ export class SeuPlanoComponent implements OnInit {
           console.error(e);
         }
       });
-  }
-
-  onVerPlanos() {
-    this.router.navigate(["/planos"]);
   }
 
 }

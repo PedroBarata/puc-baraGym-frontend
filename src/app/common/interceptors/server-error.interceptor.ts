@@ -5,9 +5,9 @@ import {
 } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { retry, catchError, finalize, delay } from 'rxjs/operators';
-import { NotificationService } from '../services/notification.service';
-import { LoadingService } from '../services/loading.service';
-import { LoggingService } from '../services/logging.service';
+import { NotificationService } from '../../services/notification.service';
+import { LoadingService } from '../../services/loading.service';
+import { LoggingService } from '../../services/logging.service';
 
 @Injectable()
 export class ServerErrorInterceptor implements HttpInterceptor {

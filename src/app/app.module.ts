@@ -10,9 +10,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AuthInterceptor } from './auth/auth-interceptor';
 import { AlertModule } from './common/components/alert/alert.module';
-import { LoadGlobalModule } from './common/load-global/load-global.module';
-import { GlobalLoadingInterceptor } from './error/global-loading.interceptor';
-import { ServerErrorInterceptor } from './error/server-error.interceptor';
+import { LoadGlobalModule } from './common/components/load-global/load-global.module';
+import { GlobalLoadingInterceptor } from './common/interceptors/global-loading.interceptor';
+import { ServerErrorInterceptor } from './common/interceptors/server-error.interceptor';
 
 registerLocaleData(localePt, 'pt-BR');
 @NgModule({

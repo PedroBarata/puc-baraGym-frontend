@@ -20,11 +20,11 @@ export class AtividadeService {
         );
     }
 
-    obterTodasAtivitdades()   {
+    obterTodasAtividades(page: number, pageSize: number)   {
 
       return this.http
         .get<Page<Atividade>>(
-          `${environment.apiUrl}/atividades`
+          `${environment.apiUrl}/atividades?page=${page}&size${pageSize}`
         );
     }
   }

@@ -85,4 +85,14 @@ $carousel-transition-duration:       .6s;
 $carousel-transition:                transform $carousel-transition-duration ease-in-out; // Define transform transition first if using multiple transitions (e.g., `transform 2s ease, opacity .5s ease-out`)
 
 
+ul.list-group.list-group-striped li:nth-of-type(odd){
+  background: $table-gray;
+}
+ul.list-group.list-group-striped li:nth-of-type(2) {
+	background: $white;
+}
+ul.list-group.list-group-hover li:hover{
+  background: $table-hover-gray;
+}
+
 @import '../node_modules/bootstrap/scss/bootstrap.scss';

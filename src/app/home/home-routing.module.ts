@@ -3,7 +3,8 @@ import { Route, RouterModule, Routes } from "@angular/router";
 import { AgendamentosComponent } from "./agendamentos/agendamentos.component";
 import { ListAulaAtividadeComponent } from "./aula-atividade/list-aula-atividade/list-aula-atividade.component";
 import { HomeComponent } from "./home.component";
-import { SeuPlanoComponent } from "./seu-plano/seu-plano.component";
+import { CreatePlanoComponent } from "./seu-plano/create-plano/create-plano.component";
+import { ListPlanoComponent } from "./seu-plano/list-plano/list-plano.component";
 import { ListTurmaComponent } from "./turma/list-turma/list-turma.component";
 
 
@@ -13,7 +14,6 @@ export const HOME_ROUTE: Route = {
   children: [
     {
       path: 'seu-plano',
-      component: SeuPlanoComponent,
       loadChildren: () => import('./seu-plano/seu-plano.module').then(m => m.SeuPlanoModule),
     },
     {

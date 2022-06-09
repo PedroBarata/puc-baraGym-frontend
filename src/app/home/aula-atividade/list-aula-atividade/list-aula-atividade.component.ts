@@ -15,7 +15,7 @@ export class ListAulaAtividadeComponent implements OnInit {
   constructor(private atividadeService: AtividadeService) { }
 
   ngOnInit(): void {
-    this.atividadeService.obterTodasAtivitdades().subscribe({
+    this.atividadeService.obterTodasAtividades(0, 10).subscribe({
       next: (response) => {
         this.atividadeList = response;
 

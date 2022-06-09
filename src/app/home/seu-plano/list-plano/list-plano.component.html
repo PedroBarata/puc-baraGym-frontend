@@ -3,14 +3,14 @@
     <h1>Seu plano</h1>
   </div>
   <div class="col-auto align-self-center">
-    <button class="btn btn-primary px-2 align-self-center">Trocar de plano</button>
+    <button class="btn btn-primary px-2 align-self-center" [routerLink]="['./novo-plano']">Trocar de plano</button>
   </div>
 </div>
 <div class="row" *ngIf="atividadesDoPlano?.length === 0">
   <div class="col-12 text-center">
     <p style="font-size: 18px;">Você não está cadastrado em nenhum plano. <br />
       Que tal dar uma olhadinha no que preparamos para você?</p>
-    <button class="btn btn-primary px-2 mx-3 mt-5" (click)="onVerPlanos()">Ver planos</button>
+    <button class="btn btn-primary px-2 mx-3 mt-5" [routerLink]="['./novo-plano']">Ver planos</button>
   </div>
 </div>
 

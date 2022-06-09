@@ -1,6 +1,14 @@
-.intro-image {
+.intro-image-full {
   background-image: url('../../assets/imgs/home.jpg');
   height: 45vh;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position-y: center;
+}
+
+.intro-image-mini {
+  background-image: url('../../assets/imgs/home.jpg');
+  height: 15vh;
   background-size: cover;
   background-repeat: no-repeat;
   background-position-y: center;
