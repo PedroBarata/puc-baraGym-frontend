@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { JwtConstants } from 'src/app/common/constants/jwt-constants';
 import { Atividade } from 'src/app/model/atividade.model';
 import { Page } from 'src/app/model/page.model';
+import { CreateAtividade, CreateUsuarioAtividade } from 'src/app/model/usuario-atividade.model';
 import { AtividadeService } from 'src/app/services/atividade.service';
 import { NotificationService } from 'src/app/services/notification.service';
 
@@ -20,7 +22,7 @@ export class CreatePlanoComponent implements OnInit {
 
   atividades: Page<Atividade> = new Page<Atividade>();
   valorTotal: number = 0;
-
+  atividadeIndex: number = 2;
   atividadesSelecionadas: AtividadeSelecionada[] | undefined;
 
 
@@ -30,11 +32,12 @@ export class CreatePlanoComponent implements OnInit {
   ngOnInit(): void {
     this.atividadesSelecionadas = [];
 
-    this.atividadeService.obterTodasAtividades(0, 2).subscribe({
+    this.atividadeService.obterTodasAtividades(0, this.atividadeIndex).subscribe({
       next: (response) => {
         console.log(response);
 
         this.atividades = response;
+        this.atividadeIndex++;
       },
       error: (err) => {
         console.error(err);
@@ -66,11 +69,82 @@ export class CreatePlanoComponent implements OnInit {
     console.log("digdon morre de ré", atividade);
   }
 
+  onPrevCarousel() {
+    if(this.atividades.last) {
+      return;
+    }
+
+    this.atividadeService.obterTodasAtividades(0, this.atividadeIndex).subscribe({
+      next: (response) => {
+        console.log(response);
+
+        this.atividades = response;
+        this.atividadeIndex--;
+      },
+      error: (err) => {
+        console.error(err);
+
+      }
+    });
+  }
+
+  onNextCarousel() {
+    if(this.atividades.last) {
+      return;
+    }
+
+    this.atividadeService.obterTodasAtividades(0, this.atividadeIndex).subscribe({
+      next: (response) => {
+        console.log(response);
+
+        this.atividades = response;
+        this.atividadeIndex++;
+      },
+      error: (err) => {
+        console.error(err);
+
+      }
+    });
+  }
+
   onDeleteAtividadeSelecionada(atividadeSelecionada: AtividadeSelecionada) {
     const achouElemento = this.atividadesSelecionadas!.find(el => el.atividadeId === atividadeSelecionada.atividadeId);
     const indexElemento = this.atividadesSelecionadas!.indexOf(achouElemento!);
     this.atividadesSelecionadas!.splice(indexElemento, 1);
     console.log(atividadeSelecionada);
+  }
+
+  onFinalizarCompra() {
+    if (!this.atividadesSelecionadas || this.atividadesSelecionadas?.length === 0) {
+      this.notificationService.info(`Adicione atividades no seu resumo para prosseguir com a compra.`);
+      return;
+    }
+
+    const array: any = this.atividadesSelecionadas!.map(function (atividade) {
+      return {
+        atividadeId: atividade.atividadeId,
+        quantidadeSemana: atividade.quantidadeSemana
+      }
+    });
+    console.log(array);
+
+    const atividadesParaCompra: CreateUsuarioAtividade = {
+      atividades: array,
+      valorTotal: this.valorTotal
+    }
+
+    this.atividadeService
+    .cadastrarUsuarioAtividade(localStorage.getItem(JwtConstants.VAR_MATRICULA) as string, atividadesParaCompra)
+    .subscribe({
+      next: (response) => {
+        console.log(response);
+        this.notificationService.success("Compra realizada com sucesso.");
+      },
+      error: (err) => {
+        console.error(err);
+
+      }
+    })
   }
 
 }

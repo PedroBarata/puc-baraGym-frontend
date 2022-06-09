@@ -7,11 +7,11 @@
 <div class="row">
   <div class="col-7 m-4">
     <h2>Atividades</h2>
-    <div id="carouselExampleControls" class="carousel slide p-4 plano-card" data-bs-ride="carousel"
+    <div id="carouselExampleControls" class="carousel p-4 plano-card" data-bs-ride="carousel"
       style="height: 55vh;">
       <div class="carousel-inner">
         <div class="carousel-item" *ngFor="let atividade of atividades!.content"
-          [ngClass]="this.atividades!.content.indexOf(atividade) || this.atividades!.numberOfElements === 1? 'active' : ''">
+          [ngClass]="(this.atividades!.content[0] === atividade || this.atividades!.numberOfElements === 1)? 'active' : ''">
           <div class="row text-center">
             <div class="col-10 text-center m-auto">
               <form (submit)="onAdicionarAtividade(atividade, atividadeForm)" #atividadeForm="ngForm" novalidate>
@@ -50,11 +50,11 @@
         </div>
       </div>
       <button *ngIf="this.atividades!.numberOfElements > 1" class="carousel-control-prev" type="button"
-        data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+        data-bs-target="#carouselExampleControls" data-bs-slide="prev" (click)="onPrevCarousel()">
         <i class="fa-regular fa-circle-left" style="zoom: 1.9;"></i>
       </button>
       <button *ngIf="this.atividades!.numberOfElements > 1" class="carousel-control-next" type="button"
-        data-bs-target="#carouselExampleControls" data-bs-slide="next">
+        data-bs-target="#carouselExampleControls" data-bs-slide="next" (click)="onNextCarousel()">
         <i class="fa-regular fa-circle-right" style="zoom: 1.9;"></i>
       </button>
     </div>
@@ -99,8 +99,8 @@
 </div>
 <div class="row">
   <div class="center-block text-center m-auto mt-3">
-    <button class="btn btn-primary px-2 mx-3">Cancelar</button>
-    <button class="btn btn-primary px-2 mx-3">Adicionar</button>
+    <button type="button" class="btn btn-outline-primary px-2 mx-3" [routerLink]="['../']" routerLinkActive="router-link-active" >Cancelar</button>
+    <button type="button" class="btn btn-primary px-2 mx-3" (click)="onFinalizarCompra()">Comprar</button>
   </div>
 
 </div>

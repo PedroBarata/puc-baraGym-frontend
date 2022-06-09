@@ -7,3 +7,13 @@ export interface UsuarioAtvidade {
   vigenciaFim: Date;
   valorTotal: number;
 }
+
+export interface CreateUsuarioAtividade {
+  atividades: CreateAtividade[],
+  valorTotal: number;
+}
+
+export interface CreateAtividade {
+    atividadeId: number;
+    quantidadeSemana: number;
+}

@@ -4,15 +4,18 @@
 @import "../node_modules/bootstrap/scss/variables";
 @import "./variables";
 
-.btn {
+.btn-primary {
   color: #fff !important;
-  border-radius: 100px !important;
+}
+.btn-outline-primary:hover {
+  color: #fff !important;
 }
 
 .text-primary {
   color: $primary !important;
 }
 
+$btn-border-radius: 100px;
 //futhermore it's necesary override the $theme-colors
 
 $theme-colors: (
