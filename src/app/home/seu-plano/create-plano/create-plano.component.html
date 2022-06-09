@@ -7,21 +7,21 @@
 <div class="row">
   <div class="col-7 m-4">
     <h2>Atividades</h2>
-    <div id="carouselExampleControls" class="carousel p-4 plano-card" data-bs-ride="carousel"
+    <div id="carouselExampleControls" class="carousel p-4 slide vertical-center plano-card" data-bs-ride="carousel"
       style="height: 55vh;">
       <div class="carousel-inner">
         <div class="carousel-item" *ngFor="let atividade of atividades!.content"
           [ngClass]="(this.atividades!.content[0] === atividade || this.atividades!.numberOfElements === 1)? 'active' : ''">
-          <div class="row text-center">
+          <div class="row  text-center">
             <div class="col-10 text-center m-auto">
               <form (submit)="onAdicionarAtividade(atividade, atividadeForm)" #atividadeForm="ngForm" novalidate>
 
                 <div class="card mb-2 card-plano card-atividade">
-                  <div class="card-body">
+                  <div class="card-body" style="height: 49vh;">
                     <h4 class="card-title text-primary mb-3">{{atividade.nome}}</h4>
                     <p class="card-text text-plano">{{atividade.descricao}} </p>
 
-                    <div class="my-5 px-5 text-start">
+                    <div class="my-4 px-5 text-start">
                       <label for="qtdSemanaInput" class="form-label">Quantidade de vezes na semana</label>
                       <input name="vezesNaSemana" type="number" class="form-control" id="qtdSemanaInput" required
                         #vezesNaSemana="ngModel" ngModel min="1" max="6"
@@ -32,7 +32,7 @@
                       <div class="invalid-feedback">
                         Insira um número entre um (1) e seis (6)
                       </div>
-                      <h5 class="text-center text-plano m-5">
+                      <h5 class="text-center text-plano m-3">
                         <span class="text-primary fw-bold">{{atividade.valorDia | currency}}</span>
                         <span> mensal</span>
                       </h5>

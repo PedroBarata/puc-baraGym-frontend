@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
 import { JwtConstants } from 'src/app/common/constants/jwt-constants';
 import { Atividade } from 'src/app/model/atividade.model';
 import { Page } from 'src/app/model/page.model';
@@ -22,12 +23,13 @@ export class CreatePlanoComponent implements OnInit {
 
   atividades: Page<Atividade> = new Page<Atividade>();
   valorTotal: number = 0;
-  atividadeIndex: number = 2;
+  atividadeIndex: number =2;
   atividadesSelecionadas: AtividadeSelecionada[] | undefined;
 
 
   constructor(private atividadeService: AtividadeService,
-    private notificationService: NotificationService) { }
+    private notificationService: NotificationService,
+    private router: Router) { }
 
   ngOnInit(): void {
     this.atividadesSelecionadas = [];
@@ -139,6 +141,7 @@ export class CreatePlanoComponent implements OnInit {
       next: (response) => {
         console.log(response);
         this.notificationService.success("Compra realizada com sucesso.");
+        this.router.navigate(["../"])
       },
       error: (err) => {
         console.error(err);

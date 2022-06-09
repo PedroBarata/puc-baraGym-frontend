@@ -19,7 +19,7 @@
     <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
       <div class="carousel-inner">
         <div class="carousel-item" *ngFor="let atividade of atividadesDoPlano"
-          [ngClass]="this.atividadesDoPlano.indexOf(atividade) || this.atividadesDoPlano.length === 1? 'active' : ''">
+          [ngClass]="this.atividadesDoPlano[0] === atividade || this.atividadesDoPlano.length === 1? 'active' : ''">
           <div class="row">
             <div class="col-md-12">
               <div class="card mb-2 card-plano">
