@@ -10,6 +10,14 @@ export class Page<T> {
     unsorted: boolean;
   };
 
+  pageable?: {
+    offset: number
+    pageNumber: number
+    pageSize: number
+    paged: boolean
+    unpaged: boolean
+  };
+
   first: boolean = false;
   numberOfElements: number = 0;
   empty: boolean = true;

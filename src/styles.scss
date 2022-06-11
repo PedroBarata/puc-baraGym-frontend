@@ -68,6 +68,14 @@ $position-values: (
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px $primary;
 }
 
+.page-item {
+  cursor: pointer;
+}
+
+.page-item.disabled{
+  cursor: default;
+}
+
 $headings-margin-bottom: $spacer * .5;
 $headings-font-family: inter;
 $headings-font-style: inter;
