@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscriber, Subscription } from 'rxjs';
+import { DataTable } from 'src/app/model/data-table.model';
 import { Page } from 'src/app/model/page.model';
 import { Turma } from 'src/app/model/turma.model';
 import { TurmaService } from 'src/app/services/turma.service';
@@ -12,13 +13,23 @@ import { TurmaService } from 'src/app/services/turma.service';
 export class ListTurmaComponent implements OnInit, OnDestroy {
 
   turmaList: Page<Turma> = new Page<Turma>();
-  pageSize: number  = 1;
+  pageSize: number = 1;
   totalPages: Array<number> = [];
   obterTurmasSub: Subscription = new Subscription();
 
   visitedPages: Array<number> = [0];
   allContent: Turma[] = [];
   currentPage: number = -1;
+
+  configuracaoTable: DataTable = {
+    colunas: [
+      { titulo: "Nome", nomeCampo: "nome" },
+      { titulo: "Capacidade", nomeCampo: "capacidade" }
+    ],
+    registrosPorPagina: 1
+  }
+
+
 
   constructor(private turmaService: TurmaService) { }
 
@@ -46,7 +57,7 @@ export class ListTurmaComponent implements OnInit, OnDestroy {
 
   onNextPage() {
 
-    if(this.currentPage === this.totalPages.length -1) {
+    if (this.currentPage === this.totalPages.length - 1) {
       return;
     }
 
@@ -66,7 +77,7 @@ export class ListTurmaComponent implements OnInit, OnDestroy {
         console.log(response);
         this.visitedPages.push(nextPage);
         this.allContent.push(...response.content);
-        this.allContent.sort((a,b)=> a.id! - b.id!);
+        this.allContent.sort((a, b) => a.id! - b.id!);
         this.turmaList = response;
         this.currentPage = nextPage;
         /*   this.turmaList.content.push(...response.content);
@@ -87,7 +98,7 @@ export class ListTurmaComponent implements OnInit, OnDestroy {
 
   onPrevPage() {
 
-    if(this.currentPage === 0) {
+    if (this.currentPage === 0) {
       return;
     }
 
@@ -107,7 +118,7 @@ export class ListTurmaComponent implements OnInit, OnDestroy {
         console.log(response);
         this.visitedPages.push(prevPage);
         this.allContent.push(...response.content);
-        this.allContent.sort((a,b)=> a.id! - b.id!);
+        this.allContent.sort((a, b) => a.id! - b.id!);
         this.turmaList = response;
         this.currentPage = prevPage;
         /*   this.turmaList.content.push(...response.content);
@@ -146,7 +157,7 @@ export class ListTurmaComponent implements OnInit, OnDestroy {
         console.log(response);
         this.visitedPages.push(page);
         this.allContent.push(...response.content);
-        this.allContent.sort((a,b)=> a.id! - b.id!);
+        this.allContent.sort((a, b) => a.id! - b.id!);
         console.log(this.allContent);
 
         this.turmaList = response;
@@ -163,16 +174,16 @@ export class ListTurmaComponent implements OnInit, OnDestroy {
   getCurrentElements(page: number, pageSize: number, array: Array<any>) {
     console.log(page);
 
- /*    if (page === 0) {
-      console.log("entrou na pagina 0", array.slice(page, pageSize));
+    /*    if (page === 0) {
+         console.log("entrou na pagina 0", array.slice(page, pageSize));
 
-      return array.slice(page, pageSize);
-    }
-    if (page === array.length) {
-      console.log("entrou na ultima pagina", array.slice(page, pageSize));
+         return array.slice(page, pageSize);
+       }
+       if (page === array.length) {
+         console.log("entrou na ultima pagina", array.slice(page, pageSize));
 
-      return array.slice(-pageSize);
-    } */
+         return array.slice(-pageSize);
+       } */
     const offSet = page * pageSize;
     console.log(offSet);
 
@@ -180,13 +191,20 @@ export class ListTurmaComponent implements OnInit, OnDestroy {
 
     const response = array.slice(offSet, offSet + pageSize);
 
-    if(response.length === 0) {
+    if (response.length === 0) {
       console.log("entrou");
 
       return array.slice(-pageSize);
     }
     return response;
 
+  }
+
+  public obterTurmas = (pagination?: {page: number, pageSize: number}) => {
+    if(pagination) {
+    return this.turmaService.obterTurmas({page: pagination.page, pageSize: pagination.pageSize});
+    }
+   return this.turmaService.obterTurmas();
   }
 
 }

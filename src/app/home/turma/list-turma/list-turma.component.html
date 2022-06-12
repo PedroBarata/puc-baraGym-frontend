@@ -8,36 +8,5 @@
 </div>
 
 <div class="row">
-  <div class="container">
-    <table class="table table-striped">
-      <thead>
-        <tr>
-          <th>Nome</th>
-          <th>Capacidade</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let group of turmaList?.content">
-          <td>{{group.nome}}</td>
-          <td>{{group.capacidade}}</td>
-        </tr>
-      </tbody>
-    </table>
-    <nav aria-label="paginacao">
-      <ul class="pagination justify-content-center">
-        <li class="page-item" [ngClass]="currentPage === 0? 'disabled': ''"
-        (click)="onPrevPage()">
-          <a class="page-link">Anterior</a>
-        </li>
-        <li class="page-item" [ngClass]="page === currentPage? 'active' : ''"
-          *ngFor="let page of totalPages" (click)="onPage(page)">
-          <a class="page-link">{{page + 1}}</a>
-        </li>
-        <li class="page-item" [ngClass]="currentPage === (totalPages.length -1)? 'disabled': ''"
-        (click)="onNextPage()">
-          <a class="page-link">Próxima</a>
-        </li>
-      </ul>
-    </nav>
-  </div>
+  <app-table-pagination [listaFuncao]="obterTurmas" [tableConfig]="configuracaoTable"></app-table-pagination>
 </div>
