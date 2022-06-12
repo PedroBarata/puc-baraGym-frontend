@@ -1,11 +1,5 @@
-<div class="row ms-3 my-4">
-  <div class="col-auto">
-    <h1>Turmas</h1>
-  </div>
-  <div class="col-auto align-self-center">
-    <button class="btn btn-primary px-2 align-self-center" [routerLink]="['./nova-turma']">Cadastrar</button>
-  </div>
-</div>
+<app-sub-title titulo="Turmas" subtitulo="Cadastrar" [isVoltar]="false" linkVoltar="./nova-turma"></app-sub-title>
+
 
 <div class="row">
   <app-table-pagination [listaFuncao]="obterTurmas" [tableConfig]="configuracaoTable"></app-table-pagination>

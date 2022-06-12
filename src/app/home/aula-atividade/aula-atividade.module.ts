@@ -6,6 +6,7 @@ import { CreateAtividadeComponent } from './create-atividade/create-atividade.co
 import { FormsModule } from '@angular/forms';
 import { LoadButtonModule } from 'src/app/common/components/load-button/load-button.module';
 import { TablePaginationModule } from 'src/app/common/components/table-pagination/table-pagination.module';
+import { SubTitleModule } from 'src/app/common/components/sub-title/sub-title.module';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { TablePaginationModule } from 'src/app/common/components/table-paginatio
     AulaAtividadeRoutingModule,
     FormsModule,
     LoadButtonModule,
-    TablePaginationModule
+    TablePaginationModule,
+    SubTitleModule
   ]
 })
 export class AulaAtividadeModule { }

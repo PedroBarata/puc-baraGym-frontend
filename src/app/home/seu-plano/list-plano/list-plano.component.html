@@ -1,11 +1,6 @@
-<div class="row ms-3 my-4">
-  <div class="col-auto">
-    <h1>Seu plano</h1>
-  </div>
-  <div class="col-auto align-self-center">
-    <button class="btn btn-primary px-2 align-self-center" [routerLink]="['./novo-plano']">Trocar de plano</button>
-  </div>
-</div>
+<app-sub-title titulo="Seu plano" subtitulo="Trocar de plano" [isVoltar]="false" linkVoltar="./novo-plano"></app-sub-title>
+
+
 <div class="row" *ngIf="atividadesDoPlano?.length === 0">
   <div class="col-12 text-center">
     <p style="font-size: 18px;">Você não está cadastrado em nenhum plano. <br />
