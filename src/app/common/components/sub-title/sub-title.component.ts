@@ -8,8 +8,9 @@ import { Component, Input, OnInit } from '@angular/core';
 export class SubTitleComponent implements OnInit {
 
   @Input() titulo: string = '';
-  @Input() voltar: string = '';
+  @Input() subtitulo: string = '';
   @Input() linkVoltar: string = '';
+  @Input() isVoltar: boolean = false;
 
   constructor() { }
 

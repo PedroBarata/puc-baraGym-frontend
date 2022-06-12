@@ -1,11 +1,5 @@
-<div class="row ms-3 my-4">
-  <div class="col-auto">
-    <h1>Agendamentos</h1>
-  </div>
-  <div class="col-auto align-self-center" *ngIf="!agendamentos.empty">
-    <button class="btn btn-primary px-2 align-self-center" [routerLink]="['./novo-agendamento']">Alterar</button>
-  </div>
-</div>
+<app-sub-title titulo="Agendamentos" subtitulo="Alterar" [isVoltar]="false" linkVoltar="./novo-agendamento"></app-sub-title>
+
 <div class="row" *ngIf="agendamentos.empty">
   <div class="col-12 text-center">
     <p style="font-size: 18px;">Você não possui nenhum agendamento das suas atividades.<br />
