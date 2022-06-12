@@ -25,15 +25,15 @@
     </table>
     <nav aria-label="paginacao">
       <ul class="pagination justify-content-center">
-        <li class="page-item" [ngClass]="turmaList.first? 'disabled': ''"
+        <li class="page-item" [ngClass]="currentPage === 0? 'disabled': ''"
         (click)="onPrevPage()">
           <a class="page-link">Anterior</a>
         </li>
-        <li class="page-item" [ngClass]="page === turmaList.pageable?.pageNumber? 'active' : ''"
+        <li class="page-item" [ngClass]="page === currentPage? 'active' : ''"
           *ngFor="let page of totalPages" (click)="onPage(page)">
           <a class="page-link">{{page + 1}}</a>
         </li>
-        <li class="page-item" [ngClass]="turmaList.last? 'disabled': ''"
+        <li class="page-item" [ngClass]="currentPage === (totalPages.length -1)? 'disabled': ''"
         (click)="onNextPage()">
           <a class="page-link">Próxima</a>
         </li>

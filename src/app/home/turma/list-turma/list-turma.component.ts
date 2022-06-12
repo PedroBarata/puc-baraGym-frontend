@@ -18,6 +18,7 @@ export class ListTurmaComponent implements OnInit, OnDestroy {
 
   visitedPages: Array<number> = [0];
   allContent: Turma[] = [];
+  currentPage: number = -1;
 
   constructor(private turmaService: TurmaService) { }
 
@@ -27,6 +28,8 @@ export class ListTurmaComponent implements OnInit, OnDestroy {
         console.log(response);
         this.turmaList = response;
         this.allContent = response.content;
+        this.currentPage = 0;
+
         this.totalPages = Array(response.totalPages).fill(0).map((_, i) => i);
 
         console.log(this.totalPages);
@@ -42,16 +45,30 @@ export class ListTurmaComponent implements OnInit, OnDestroy {
   }
 
   onNextPage() {
-    const nextPage = this.turmaList.pageable?.pageNumber! + 1;
 
-    if (this.visitedPages.find(e => e === nextPage)) {
+    if(this.currentPage === this.totalPages.length -1) {
+      return;
+    }
+
+    const nextPage = this.currentPage + 1;
+
+    if (this.visitedPages.find(e => e === nextPage) !== undefined) {
+      console.log(this.allContent);
+
+      this.turmaList.content = this.getCurrentElements(nextPage, this.pageSize, this.allContent);
+      console.log(this.turmaList.content);
+      this.currentPage = nextPage;
       return;
     }
 
     this.turmaService.obterTurmas({ page: nextPage, pageSize: this.pageSize }).subscribe({
       next: (response) => {
         console.log(response);
+        this.visitedPages.push(nextPage);
+        this.allContent.push(...response.content);
+        this.allContent.sort((a,b)=> a.id! - b.id!);
         this.turmaList = response;
+        this.currentPage = nextPage;
         /*   this.turmaList.content.push(...response.content);
           this.turmaList = {
             ...response,
@@ -69,12 +86,30 @@ export class ListTurmaComponent implements OnInit, OnDestroy {
 
 
   onPrevPage() {
-    console.log(this.turmaList.pageable?.pageNumber);
 
-    this.turmaService.obterTurmas({ page: this.turmaList.pageable?.pageNumber! - 1, pageSize: this.pageSize }).subscribe({
+    if(this.currentPage === 0) {
+      return;
+    }
+
+    const prevPage = this.currentPage - 1;
+
+    if (this.visitedPages.find(e => e === prevPage) !== undefined) {
+      console.log(this.allContent);
+
+      this.turmaList.content = this.getCurrentElements(prevPage, this.pageSize, this.allContent);
+      console.log(this.turmaList.content);
+      this.currentPage = prevPage;
+      return;
+    }
+
+    this.turmaService.obterTurmas({ page: prevPage, pageSize: this.pageSize }).subscribe({
       next: (response) => {
         console.log(response);
+        this.visitedPages.push(prevPage);
+        this.allContent.push(...response.content);
+        this.allContent.sort((a,b)=> a.id! - b.id!);
         this.turmaList = response;
+        this.currentPage = prevPage;
         /*   this.turmaList.content.push(...response.content);
           this.turmaList = {
             ...response,
@@ -91,6 +126,9 @@ export class ListTurmaComponent implements OnInit, OnDestroy {
   }
 
   onPage(page: number) {
+    this.currentPage = page;
+
+
     console.log(this.visitedPages);
     console.log(this.visitedPages.find(e => e === page));
 
