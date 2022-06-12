@@ -4,6 +4,7 @@ import { AgendamentosRoutingModule } from './agendamentos-routing.module';
 import { ListAgendamentoComponent } from './list-agendamento/list-agendamento.component';
 import { CreateAgendamentoComponent } from './create-agendamento/create-agendamento.component';
 import { FormsModule } from '@angular/forms';
+import { SubTitleModule } from 'src/app/common/components/sub-title/sub-title.module';
 
 
 
@@ -12,7 +13,8 @@ import { FormsModule } from '@angular/forms';
   imports: [
     CommonModule,
     FormsModule,
-    AgendamentosRoutingModule
+    AgendamentosRoutingModule,
+    SubTitleModule
   ]
 })
 export class AgendamentosModule { }
