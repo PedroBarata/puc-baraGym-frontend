@@ -14,7 +14,7 @@ export class ListTurmaComponent implements OnInit {
       { titulo: "Nome", nomeCampo: "nome" },
       { titulo: "Capacidade", nomeCampo: "capacidade" }
     ],
-    registrosPorPagina: 2
+    registrosPorPagina: 10
   }
 
   constructor(private turmaService: TurmaService) { }

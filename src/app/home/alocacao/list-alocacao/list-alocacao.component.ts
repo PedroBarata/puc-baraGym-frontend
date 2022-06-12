@@ -19,7 +19,7 @@ export class ListAlocacaoComponent implements OnInit {
       { titulo: "Término", nomeCampo: "horaFim" },
       { titulo: "Dia da semana", nomeCampo: "nomeDiaSemana" }
     ],
-    registrosPorPagina: 2
+    registrosPorPagina: 10
   }
 
 

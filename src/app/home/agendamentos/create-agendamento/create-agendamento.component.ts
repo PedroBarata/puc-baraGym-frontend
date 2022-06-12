@@ -29,7 +29,7 @@ export class CreateAgendamentoComponent implements OnInit {
   paginasVisitadas: Array<number> = [0];
   conteudoTotal: UsuarioAlocacaoAgendamento[] = [];
   paginaAtual: number = -1;
-  registrosPorPagina: number = 2;
+  registrosPorPagina: number = 10;
 
   constructor(
     private atividadeService: AtividadeService,

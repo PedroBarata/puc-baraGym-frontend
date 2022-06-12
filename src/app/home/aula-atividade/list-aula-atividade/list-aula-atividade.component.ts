@@ -16,7 +16,7 @@ export class ListAulaAtividadeComponent implements OnInit {
       { titulo: "Nome", nomeCampo: "nome" },
       { titulo: "Valor/Dia", nomeCampo: "valorDia", isCurrency: true }
     ],
-    registrosPorPagina: 2
+    registrosPorPagina: 10
   }
 
 
