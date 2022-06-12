@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ListAlocacao } from 'src/app/model/alocacao.model';
+import { DataTable } from 'src/app/model/data-table.model';
 import { Page } from 'src/app/model/page.model';
 import { AlocacaoService } from 'src/app/services/alocacao.service';
 
@@ -10,20 +11,27 @@ import { AlocacaoService } from 'src/app/services/alocacao.service';
 })
 export class ListAlocacaoComponent implements OnInit {
 
-  alocacoes: Page<ListAlocacao> = new Page<ListAlocacao>();
+  configuracaoTable: DataTable = {
+    colunas: [
+      { titulo: "Nome", nomeCampo: "nomeAtividade" },
+      { titulo: "Turma", nomeCampo: "nomeTurma" },
+      { titulo: "Início", nomeCampo: "horaInicio" },
+      { titulo: "Término", nomeCampo: "horaFim" },
+      { titulo: "Dia da semana", nomeCampo: "nomeDiaSemana" }
+    ],
+    registrosPorPagina: 2
+  }
+
 
   constructor(private alocacaoService: AlocacaoService) { }
 
   ngOnInit(): void {
-    this.alocacaoService.obterAlocacoes().subscribe({
-      next: (response) => {
-        console.log(response);
-        this.alocacoes = response;
-      },
-      error: (e) => {
-        console.error(e);
-      }
-    });
   }
 
+  obterAlocacoes = (pagination?: { page: number, pageSize: number }) => {
+    if (pagination) {
+      return this.alocacaoService.obterAlocacoes({ page: pagination.page, pageSize: pagination.pageSize });
+    }
+    return this.alocacaoService.obterAlocacoes();
+  }
 }

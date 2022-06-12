@@ -5,6 +5,7 @@ import { CreateAlocacaoComponent } from './create-alocacao/create-alocacao.compo
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoadButtonModule } from 'src/app/common/components/load-button/load-button.module';
 import { AlocacaoRoutingModule } from './alocacao-routing.module';
+import { TablePaginationModule } from 'src/app/common/components/table-pagination/table-pagination.module';
 
 
 
@@ -18,7 +19,8 @@ import { AlocacaoRoutingModule } from './alocacao-routing.module';
     FormsModule,
     AlocacaoRoutingModule,
     LoadButtonModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    TablePaginationModule
   ]
 })
 export class AlocacaoModule { }

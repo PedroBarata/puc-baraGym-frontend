@@ -116,14 +116,11 @@ export class TablePaginationComponent implements OnInit, OnDestroy {
   private _obtemDadosServico(pagina: number) {
     return this.listaFuncao({ page: pagina, pageSize: this.tableConfig.registrosPorPagina }).subscribe({
       next: (response) => {
-        console.log(response);
         this.paginasVisitadas.push(pagina);
         this.conteudoTotal.push(...response.content);
         this.conteudoTotal.sort((a, b) => a.id! - b.id!);
-        console.log(this.conteudoTotal);
-
         this.paginacaoList = response;
-
+        this.paginaAtual = pagina;
       },
       error: (err) => {
         console.error(err);
