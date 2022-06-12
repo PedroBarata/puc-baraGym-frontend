@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Atividade } from 'src/app/model/atividade.model';
+import { DataTable } from 'src/app/model/data-table.model';
 import { Page } from 'src/app/model/page.model';
 import { AtividadeService } from 'src/app/services/atividade.service';
 
@@ -10,20 +11,25 @@ import { AtividadeService } from 'src/app/services/atividade.service';
 })
 export class ListAulaAtividadeComponent implements OnInit {
 
-  atividadeList: Page<Atividade> | null = null;
+  configuracaoTable: DataTable = {
+    colunas: [
+      { titulo: "Nome", nomeCampo: "nome" },
+      { titulo: "Valor/Dia", nomeCampo: "valorDia", isCurrency: true }
+    ],
+    registrosPorPagina: 2
+  }
+
 
   constructor(private atividadeService: AtividadeService) { }
 
   ngOnInit(): void {
-    this.atividadeService.obterTodasAtividades().subscribe({
-      next: (response) => {
-        this.atividadeList = response;
+  }
 
-      },
-      error: (e) => {
-        console.error(e);
-      }
-    })
+  obterAtividades = (pagination?: { page: number, pageSize: number }) => {
+    if (pagination) {
+      return this.atividadeService.obterTodasAtividades({ page: pagination.page, pageSize: pagination.pageSize });
+    }
+    return this.atividadeService.obterTodasAtividades();
   }
 
 }

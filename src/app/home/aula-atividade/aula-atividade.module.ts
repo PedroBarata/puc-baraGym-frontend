@@ -5,6 +5,7 @@ import { AulaAtividadeRoutingModule } from './aula-atividade-routing.module';
 import { CreateAtividadeComponent } from './create-atividade/create-atividade.component';
 import { FormsModule } from '@angular/forms';
 import { LoadButtonModule } from 'src/app/common/components/load-button/load-button.module';
+import { TablePaginationModule } from 'src/app/common/components/table-pagination/table-pagination.module';
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import { LoadButtonModule } from 'src/app/common/components/load-button/load-but
     CommonModule,
     AulaAtividadeRoutingModule,
     FormsModule,
-    LoadButtonModule
+    LoadButtonModule,
+    TablePaginationModule
   ]
 })
 export class AulaAtividadeModule { }
