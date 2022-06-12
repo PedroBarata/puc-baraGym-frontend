@@ -7,7 +7,7 @@ import { JwtConstants } from "../common/constants/jwt-constants";
 import { JwtUtil } from "../common/utils/jwt-util";
 import { AuthData } from "../model/auth-data.model";
 import { JwtSub } from "../model/jwt-sub.model";
-import { NotificacaoService } from "./notification.service";
+import { NotificacaoService } from "./notificacao.service";
 
 
 @Injectable({ providedIn: "root" })

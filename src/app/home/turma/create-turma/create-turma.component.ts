@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
-import { NotificacaoService } from 'src/app/services/notification.service';
+import { NotificacaoService } from 'src/app/services/notificacao.service';
 import { TurmaService } from 'src/app/services/turma.service';
 
 @Component({

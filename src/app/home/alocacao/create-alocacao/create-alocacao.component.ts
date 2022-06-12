@@ -7,7 +7,7 @@ import { Atividade } from 'src/app/model/atividade.model';
 import { Turma } from 'src/app/model/turma.model';
 import { AlocacaoService } from 'src/app/services/alocacao.service';
 import { AtividadeService } from 'src/app/services/atividade.service';
-import { NotificacaoService } from 'src/app/services/notification.service';
+import { NotificacaoService } from 'src/app/services/notificacao.service';
 import { TurmaService } from 'src/app/services/turma.service';
 
 @Component({

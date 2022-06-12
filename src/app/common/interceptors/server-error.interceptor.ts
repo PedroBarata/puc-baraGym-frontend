@@ -5,7 +5,7 @@ import {
 } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { retry, catchError, finalize, delay } from 'rxjs/operators';
-import { NotificacaoService } from '../../services/notification.service';
+import { NotificacaoService } from '../../services/notificacao.service';
 import { LoadingService } from '../../services/loading.service';
 import { LoggingService } from '../../services/logging.service';
 

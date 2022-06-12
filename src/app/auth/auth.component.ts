@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { AuthService } from '../services/auth.service';
-import { NotificacaoService } from '../services/notification.service';
+import { NotificacaoService } from '../services/notificacao.service';
 
 @Component({
   selector: 'app-auth',

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AtividadeService } from 'src/app/services/atividade.service';
-import { NotificacaoService } from 'src/app/services/notification.service';
+import { NotificacaoService } from 'src/app/services/notificacao.service';
 
 @Component({
   selector: 'app-create-atividade',

@@ -5,7 +5,7 @@ import { UsuarioAlocacaoAgendamento } from 'src/app/model/usuario-alocacao-agend
 import { UsuarioAtividade } from 'src/app/model/usuario-atividade.model';
 import { AgendamentoService } from 'src/app/services/agendamento.service';
 import { AtividadeService } from 'src/app/services/atividade.service';
-import { NotificacaoService } from 'src/app/services/notification.service';
+import { NotificacaoService } from 'src/app/services/notificacao.service';
 
 @Component({
   selector: 'app-create-agendamento',

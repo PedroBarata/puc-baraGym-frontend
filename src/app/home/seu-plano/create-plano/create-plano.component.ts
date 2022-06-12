@@ -6,12 +6,13 @@ import { Atividade } from 'src/app/model/atividade.model';
 import { Page } from 'src/app/model/page.model';
 import { CreateUsuarioAtividade } from 'src/app/model/usuario-atividade.model';
 import { AtividadeService } from 'src/app/services/atividade.service';
-import { NotificacaoService } from 'src/app/services/notification.service';
+import { NotificacaoService } from 'src/app/services/notificacao.service';
 
 interface AtividadeSelecionada {
   atividadeId: number,
   nome: string,
-  quantidadeSemana: number
+  quantidadeSemana: number,
+  valorDia: number
 };
 
 @Component({
@@ -24,7 +25,7 @@ export class CreatePlanoComponent implements OnInit {
   atividades: Page<Atividade> = new Page<Atividade>();
   valorTotal: number = 0;
   atividadeIndex: number =0;
-  atividadesSelecionadas: AtividadeSelecionada[] | undefined;
+  atividadesSelecionadas: AtividadeSelecionada[] = [];
 
 
   constructor(private atividadeService: AtividadeService,
@@ -57,11 +58,12 @@ export class CreatePlanoComponent implements OnInit {
       return;
     }
 
-    this.atividadesSelecionadas!.push(
+    this.atividadesSelecionadas.push(
       {
         atividadeId: atividade.id!,
         nome: atividade.nome,
-        quantidadeSemana: parseInt(qtdSemana)
+        quantidadeSemana: parseInt(qtdSemana),
+        valorDia: atividade.valorDia
       }
     );
 
@@ -119,6 +121,7 @@ export class CreatePlanoComponent implements OnInit {
     const indexElemento = this.atividadesSelecionadas!.indexOf(achouElemento!);
     this.atividadesSelecionadas!.splice(indexElemento, 1);
     console.log(atividadeSelecionada);
+    this.valorTotal = this.valorTotal - atividadeSelecionada.valorDia * atividadeSelecionada.quantidadeSemana;
   }
 
   onFinalizarCompra() {
