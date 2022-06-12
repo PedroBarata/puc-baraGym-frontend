@@ -20,7 +20,7 @@
       <label>Aula/Atividade</label>
     </div>
     <button type="button" class="btn btn-primary dropdown-toggle px-4" data-bs-toggle="dropdown" aria-expanded="false">
-      Selecione
+      {{atividadeSelecionada? atividadeSelecionada.nomeAtividade : 'Selecione'}}
     </button>
     <ul class="dropdown-menu">
       <li *ngFor="let atividade of usuarioAtividades">
@@ -30,14 +30,14 @@
   </div>
 </div>
 
-<div class="row m-auto mt-5 aviso-pop" *ngIf="!alocacoes.empty && selecionouAtividade">
+<div class="row m-auto mt-5 aviso-pop" *ngIf="!paginacaoList.empty && atividadeSelecionada">
   <div class="col-auto m-auto p-4">
     <i class="fa-solid fa-circle-info me-2 text-primary"></i>
     <span class="fs-6">De acordo com o seu plano, você pode fazer até {{atividadeSelecionada?.quantidadeSemana}} agendamentos nesta atividade</span>
   </div>
 </div>
 
-<div class="row my-5" *ngIf="!alocacoes.empty && selecionouAtividade">
+<div class="row my-5" *ngIf="!paginacaoList.empty && atividadeSelecionada">
   <table class="table table-striped">
     <thead>
       <tr>
@@ -49,7 +49,7 @@
     </thead>
     <tbody>
 
-      <tr *ngFor="let alocacao of alocacoes.content">
+      <tr *ngFor="let alocacao of paginacaoList.content">
         <td>
           <div class="form-check">
             <input class="form-check-input m-auto" type="checkbox" [value]="alocacao.estaAgendado" id="flexCheckChecked"
@@ -65,24 +65,24 @@
       </tr>
     </tbody>
   </table>
-  <nav aria-label="...">
+  <nav aria-label="paginacao">
     <ul class="pagination justify-content-center">
-      <li class="page-item disabled">
-        <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Anterior</a>
+      <li class="page-item" [ngClass]="paginaAtual === 0? 'disabled': ''" (click)="onPaginaAnterior()">
+        <a class="page-link">Anterior</a>
       </li>
-      <li class="page-item"><a class="page-link" href="#">1</a></li>
-      <li class="page-item active" aria-current="page">
-        <a class="page-link" href="#">2</a>
+      <li class="page-item" [ngClass]="page === paginaAtual? 'active' : ''" *ngFor="let page of paginasTotais"
+        (click)="onPage(page)">
+        <a class="page-link">{{page + 1}}</a>
       </li>
-      <li class="page-item"><a class="page-link" href="#">3</a></li>
-      <li class="page-item">
-        <a class="page-link" href="#">Próximo</a>
+      <li class="page-item" [ngClass]="paginaAtual === (paginasTotais.length -1)? 'disabled': ''"
+        (click)="onProximaPagina()">
+        <a class="page-link">Próxima</a>
       </li>
     </ul>
   </nav>
 </div>
 
-<div class="row my-5" *ngIf="alocacoes.empty && selecionouAtividade">
+<div class="row my-5" *ngIf="paginacaoList.empty && atividadeSelecionada">
   <div class="col-12 text-center">
     <p style="font-size: 18px;">Infelizmente, esta aula/atividade ainda não possui nenhuma turma definida ainda. <br />
       Volte novamente mais tarde!
