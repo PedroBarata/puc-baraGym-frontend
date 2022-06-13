@@ -85,12 +85,11 @@ export class AuthService {
           this._accessToken = accessToken;
 
           this._jwtInfo = JwtUtil.parseJwt(accessToken);
-
-          this._setAuthTimer(this._jwtInfo.exp);
           this._estaAutenticado = true;
           this._authListener.next(true);
 
           this._salvaAuthStorage(accessToken, this._jwtInfo);
+          this._setAuthTimer();
 
           this.router.navigate(["/"]);
         },
@@ -103,6 +102,8 @@ export class AuthService {
   }
 
   deslogar() {
+    console.log('entrou!');
+
     this._accessToken = null;
     this._jwtInfo = null;
     this._estaAutenticado = false;
@@ -131,17 +132,21 @@ export class AuthService {
       this._estaAutenticado = true;
       this._jwtInfo = JwtUtil.parseJwt(this._accessToken);
 
-      this._setAuthTimer(expiraEm / 1000); /* divide por 1000 pois depois ele multiplica, e já está em ms */
+      this._setAuthTimer(); /* divide por 1000 pois depois ele multiplica, e já está em ms */
       this._authListener.next(true);
     }
   }
 
-  private _setAuthTimer(duration: number) {
-    console.log("Setting timer:", duration);
+  private _setAuthTimer() {
+    const authInformation = this._getAuthStorage();
+    const now = new Date();
+    const expiraEm = authInformation!.expirationDate.getTime() - now.getTime();
+    console.log("Setting timer:", expiraEm);
+
 
     this._tokenTimer = setTimeout(() => {
       this.deslogar();
-    }, duration * 1000);
+    }, expiraEm);
   }
 
   /* Aqui é interessante passar um Date e não um número,
