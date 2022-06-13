@@ -1,0 +1,59 @@
+<app-sub-title titulo="Seu plano" subtitulo="Trocar de plano" [isVoltar]="false" linkVoltar="./novo-plano"></app-sub-title>
+
+
+<div class="row" *ngIf="atividadesDoPlano?.length === 0">
+  <div class="col-12 text-center">
+    <p style="font-size: 18px;">Você não está cadastrado em nenhum plano. <br />
+      Que tal dar uma olhadinha no que preparamos para você?</p>
+    <button class="btn btn-primary px-2 mx-3 mt-5" [routerLink]="['./novo-plano']">Ver planos</button>
+  </div>
+</div>
+
+<div *ngIf="atividadesDoPlano!.length > 0">
+  <div class="col-md-2 text-center m-auto">
+    <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+      <div class="carousel-inner">
+        <div class="carousel-item" *ngFor="let atividade of atividadesDoPlano"
+          [ngClass]="this.atividadesDoPlano[0] === atividade || this.atividadesDoPlano.length === 1? 'active' : ''">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="card mb-2 card-plano">
+                <div class="card-body">
+                  <h4 class="card-title text-primary mb-3">{{atividade.nomeAtividade}}</h4>
+                  <p class="card-text text-plano">{{atividade.quantidadeSemana === 1? atividade.quantidadeSemana + '
+                    dia/semana' : atividade.quantidadeSemana + ' dias/semana'}} </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <button *ngIf="atividadesDoPlano.length > 1" class="carousel-control-prev" type="button"
+        data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+        <i class="fa-regular fa-circle-left" style="zoom: 1.9;"></i>
+      </button>
+      <button *ngIf="atividadesDoPlano.length > 1" class="carousel-control-next" type="button"
+        data-bs-target="#carouselExampleControls" data-bs-slide="next">
+        <i class="fa-regular fa-circle-right" style="zoom: 1.9;"></i>
+      </button>
+    </div>
+  </div>
+
+  <div class="row mt-4">
+    <div class="col-12 text-center text-plano">
+      <p>Período vigente <br />
+        <span class="text-primary fw-bold">{{atividadesDoPlano[0].vigenciaInicio | date:'dd/MM/yyyy'}}</span>
+        até
+        <span class="text-primary fw-bold">{{atividadesDoPlano[0].vigenciaFim | date:'dd/MM/yyyy'}}</span>
+      </p>
+    </div>
+  </div>
+
+  <div class="row mt-4">
+    <div class="col-12 text-center text-plano">
+      <p>Valor mensal <br />
+        <span class="text-primary fw-bold">{{atividadesDoPlano[0].valorTotal | currency}}</span>
+      </p>
+    </div>
+  </div>
+</div>

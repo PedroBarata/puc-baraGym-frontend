@@ -1,0 +1,18 @@
+@import "../../../../variables";
+
+.plano-card {
+  border: 1px solid $primary;
+  border-radius: 0.25rem;
+}
+.text-plano {
+  color: $gray-600;
+}
+
+.summary-card {
+  border-bottom: 1px solid $gray-200;
+}
+
+.card-atividade {
+  box-shadow: 0 3px 1px -2px #0003, 0 2px 2px #00000024, 0 1px 5px #0000001f;
+}
+

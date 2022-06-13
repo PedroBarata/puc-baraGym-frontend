@@ -1,0 +1,65 @@
+<body *ngIf="!ehRotaCriacaoUsuario()" class="intro-image-full">
+  <div class="container">
+    <div class="row">
+      <div class="col-12 center-block text-center">
+        <h1 class="text-white text-center h1-display">Olá, {{getNomeUsuario()}} <br /> Bom te ver novamente</h1>
+        <button class="position-absolute top-7 end-2 translate-middle-y btn btn-primary px-2 mx-3"
+          (click)="onDeslogar()">Deslogar</button>
+      </div>
+      <div class="col-12 center-block text-center">
+        <div *ngIf="ehAdmin()">
+          <button class="btn btn-primary px-2 mx-3" [routerLink]="'./turmas'" routerLinkActive="active">Turmas</button>
+          <button class="btn btn-primary px-2 mx-3" disabled>Funcionários</button>
+          <button class="btn btn-primary px-2 mx-3" [routerLink]="'./aula-atividade'"
+            routerLinkActive="active">Aulas/Atividades</button>
+          <button class="btn btn-primary px-2 mx-3" disabled>Alunos</button>
+          <button class="btn btn-primary px-2 mx-3" [routerLink]="'./alocacoes'"
+            routerLinkActive="active">Alocações</button>
+        </div>
+        <div *ngIf="!ehAdmin()">
+          <button class="btn btn-primary px-2 mx-3" [routerLink]="'./seu-plano'" routerLinkActive="active">Seu
+            plano</button>
+          <button class="btn btn-primary px-2 mx-3" disabled>Seu treino</button>
+          <button class="btn btn-primary px-2 mx-3" [routerLink]="'./agendamentos'"
+            routerLinkActive="active">Agendamentos</button>
+          <button class="btn btn-primary px-2 mx-3" disabled>Equipe</button>
+          <button class="btn btn-primary px-2 mx-3" disabled>Atendimento</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+<body *ngIf="ehRotaCriacaoUsuario()" class="intro-image-mini">
+  <div class="container">
+    <div class="row">
+      <div class="col-12 center-block text-center">
+        <button class="position-absolute top-7 end-2 translate-middle-y btn btn-primary px-2 mx-3"
+          (click)="onDeslogar()">Deslogar</button>
+      </div>
+      <div class="col-12 center-block text-center my-5">
+        <div *ngIf="ehAdmin()">
+          <button class="btn btn-primary px-2 mx-3" [routerLink]="'./turmas'" routerLinkActive="active">Turmas</button>
+          <button class="btn btn-primary px-2 mx-3" disabled>Funcionários</button>
+          <button class="btn btn-primary px-2 mx-3" [routerLink]="'./aula-atividade'"
+            routerLinkActive="active">Aulas/Atividades</button>
+          <button class="btn btn-primary px-2 mx-3" disabled>Alunos</button>
+          <button class="btn btn-primary px-2 mx-3" [routerLink]="'./alocacoes'"
+            routerLinkActive="active">Alocações</button>
+        </div>
+        <div *ngIf="!ehAdmin()">
+          <button class="btn btn-primary px-2 mx-3" [routerLink]="'./seu-plano'" routerLinkActive="active">Seu
+            plano</button>
+          <button class="btn btn-primary px-2 mx-3" disabled>Seu treino</button>
+          <button class="btn btn-primary px-2 mx-3" [routerLink]="'./agendamentos'"
+            routerLinkActive="active">Agendamentos</button>
+          <button class="btn btn-primary px-2 mx-3" disabled>Equipe</button>
+          <button class="btn btn-primary px-2 mx-3" disabled>Atendimento</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+<div class="container">
+  <router-outlet></router-outlet>
+</div>

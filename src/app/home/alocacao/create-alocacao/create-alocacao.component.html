@@ -1,0 +1,78 @@
+<div class="row ms-3 my-4">
+  <div class="col-auto">
+    <h1>Cadastrar Alocação</h1>
+  </div>
+
+  <div class="row justify-content-center m-4" novalidate>
+    <div class="col-auto m-4">
+      <!-- Example single danger button -->
+      <div>
+        <label>Aula/Atividade</label>
+      </div>
+      <button type="button" class="btn btn-primary dropdown-toggle px-4" data-bs-toggle="dropdown"
+        aria-expanded="false">
+        {{atividadeSelecionada? atividadeSelecionada.nome : 'Selecione'}}
+      </button>
+      <ul class="dropdown-menu">
+        <li *ngFor="let atividade of atividades">
+          <a class="dropdown-item" (click)="onSelecionarAtividade(atividade)">{{atividade.nome}}</a>
+        </li>
+      </ul>
+
+    </div>
+
+    <div class="col-auto m-4">
+      <div>
+        <label>Dia da semana</label>
+      </div>
+      <button type="button" class="btn btn-primary dropdown-toggle px-4" data-bs-toggle="dropdown"
+        aria-expanded="false">
+        {{diaSemanaSelecionado? diaSemanaSelecionado.nome : 'Selecione'}}
+      </button>
+      <ul class="dropdown-menu">
+        <li *ngFor="let dia of diaSemanaList">
+          <a class="dropdown-item" (click)="onSelecionarDiaDaSemana(dia)">{{dia.nome}}</a>
+        </li>
+      </ul>
+    </div>
+
+    <div class="col-auto m-4">
+      <div>
+        <label>Turma</label>
+      </div>
+      <button type="button" class="btn btn-primary dropdown-toggle px-4" data-bs-toggle="dropdown"
+        aria-expanded="false">
+        {{turmaSelecionada? turmaSelecionada.nome : 'Selecione'}}
+      </button>
+      <ul class="dropdown-menu">
+        <li *ngFor="let turma of turmas">
+          <a class="dropdown-item" (click)="onSelecionarTurma(turma)">{{turma.nome}}</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="row m-auto justify-content-center">
+    <div class="col-auto">
+      <div class="mb-3 px-5">
+        <label for="horaInicioInput" class="form-label">Horário de início</label>
+        <input type="text" [(ngModel)]="horarioInicio" class="form-control" placeholder="Insira a hora de início">
+      </div>
+    </div>
+
+    <div class="col-auto">
+      <div class="mb-5 px-5">
+        <label for="horaFimSenhaInput" class="form-label">Horário de término</label>
+        <input type="text" class="form-control" [(ngModel)]="horarioFim" placeholder="Insira a hora de término">
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="mt-5 text-center">
+    <button type="button" class="btn btn-outline-primary px-2 mx-3" [routerLink]="['../']">Cancelar</button>
+    <button type="button" class="btn btn-primary px-2 mx-3" (click)="onCriarAlocacao()">Cadastrar</button>
+
+  </div>
+</div>

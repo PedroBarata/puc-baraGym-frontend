@@ -1,0 +1,31 @@
+<div class="container">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th *ngFor="let coluna of tableConfig.colunas">{{coluna.titulo}}</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of paginacaoList?.content">
+        <td *ngFor="let coluna of tableConfig.colunas">
+          {{ coluna.isCurrency? (item[coluna.nomeCampo] | currency) : item[coluna.nomeCampo] }}
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <nav aria-label="paginacao">
+    <ul class="pagination justify-content-center">
+      <li class="page-item" [ngClass]="paginaAtual === 0? 'disabled': ''" (click)="onPaginaAnterior()">
+        <a class="page-link">Anterior</a>
+      </li>
+      <li class="page-item" [ngClass]="page === paginaAtual? 'active' : ''" *ngFor="let page of paginasTotais"
+        (click)="onPage(page)">
+        <a class="page-link">{{page + 1}}</a>
+      </li>
+      <li class="page-item" [ngClass]="paginaAtual === (paginasTotais.length -1)? 'disabled': ''"
+        (click)="onProximaPagina()">
+        <a class="page-link">Próxima</a>
+      </li>
+    </ul>
+  </nav>
+</div>

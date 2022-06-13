@@ -1,0 +1,16 @@
+<form (submit)="onLogin(loginForm)" #loginForm="ngForm" novalidate>
+    <div class="mb-3 px-5">
+      <label for="loginEmailInput" class="form-label">E-mail</label>
+      <input name="email" #emailInput="ngModel" ngModel required email type="email" class="form-control"
+        id="loginEmailInput" placeholder="Digite seu e-mail">
+    </div>
+
+    <div class="mb-5 px-5">
+      <label for="loginSenhaInput" class="form-label">Senha</label>
+      <input type="password" class="form-control" id="loginSenhaInput" name="senha" #senhaInput="ngModel" ngModel
+        required minlength="3" placeholder="Digite sua senha">
+    </div>
+    <div class="mb-3 text-center">
+      <app-load-button [form]="loginForm" [label]="'Login'"></app-load-button>
+    </div>
+</form>
