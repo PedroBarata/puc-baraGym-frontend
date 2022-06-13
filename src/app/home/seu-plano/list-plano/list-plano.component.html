@@ -1,5 +1,11 @@
-<app-sub-title titulo="Seu plano" subtitulo="Trocar de plano" [isVoltar]="false" linkVoltar="./novo-plano"></app-sub-title>
-
+<div class="row ms-3 my-4">
+  <div class="col-auto">
+    <h1>Seu plano</h1>
+  </div>
+  <div *ngIf="atividadesDoPlano!.length > 0" class="col-auto align-self-center">
+    <button class="btn btn-primary px-2 align-self-center" [routerLink]="['./novo-plano']">Trocar de plano</button>
+  </div>
+</div>
 
 <div class="row" *ngIf="atividadesDoPlano?.length === 0">
   <div class="col-12 text-center">
