@@ -2,6 +2,7 @@ import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
 import { DataTable } from 'src/app/model/data-table.model';
 import { Page } from 'src/app/model/page.model';
+import { NotificacaoService } from 'src/app/services/notificacao.service';
 
 @Component({
   selector: 'app-table-pagination',
@@ -16,18 +17,27 @@ export class TablePaginationComponent implements OnInit, OnDestroy {
   @Input()
   public listaFuncao!: (pagination: { page: number, pageSize: number }) => Observable<Page<any>>;
 
+  @Input()
+  public deletaLinha!: (item: any) => Observable<void>;
+
+  @Input()
+  public dominio?: string;
+
   paginacaoList: Page<any> = new Page<any>();
   paginasTotais: Array<number> = [];
-  subscription: Subscription = new Subscription();
+  subscriptionList: Subscription = new Subscription();
+  subscriptionDelete: Subscription = new Subscription();
 
   paginasVisitadas: Array<number> = [0];
   conteudoTotal: any[] = [];
   paginaAtual: number = -1;
 
-  constructor() { }
+  constructor(
+    private notificacaoService: NotificacaoService
+  ) { }
 
   ngOnInit(): void {
-    this.subscription = this.listaFuncao({ page: 0, pageSize: this.tableConfig.registrosPorPagina })
+    this.subscriptionList = this.listaFuncao({ page: 0, pageSize: this.tableConfig.registrosPorPagina })
       .subscribe({
         next: (response) => {
           this.paginacaoList = response;
@@ -42,7 +52,8 @@ export class TablePaginationComponent implements OnInit, OnDestroy {
   };
 
   ngOnDestroy(): void {
-    this.subscription.unsubscribe();
+    this.subscriptionList.unsubscribe();
+    this.subscriptionDelete.unsubscribe();
   };
 
   onProximaPagina() {
@@ -58,7 +69,7 @@ export class TablePaginationComponent implements OnInit, OnDestroy {
       return;
     }
 
-    this.subscription = this._obtemDadosServico(proxPagina);
+    this.subscriptionList = this._obtemDadosServico(proxPagina);
   }
 
   onPaginaAnterior() {
@@ -72,7 +83,7 @@ export class TablePaginationComponent implements OnInit, OnDestroy {
       return;
     }
 
-    this.subscription = this._obtemDadosServico(paginaAnterior);
+    this.subscriptionList = this._obtemDadosServico(paginaAnterior);
   }
 
   onPage(page: number) {
@@ -83,7 +94,7 @@ export class TablePaginationComponent implements OnInit, OnDestroy {
       return;
     }
 
-    this.subscription = this._obtemDadosServico(page);
+    this.subscriptionList = this._obtemDadosServico(page);
   }
 
 
@@ -126,6 +137,19 @@ export class TablePaginationComponent implements OnInit, OnDestroy {
         console.error(err);
       }
     });
+  }
+
+  public onDeletaItem(item: any) {
+    this.subscriptionList = this.deletaLinha(item)
+      .subscribe({
+        next: (response) => {
+          this.notificacaoService.success(`${this.dominio} removida com sucesso.`);
+          this._obtemDadosServico(this.paginaAtual);
+        },
+        error: (e) => {
+          console.error(e);
+        }
+      });
   }
 
 }

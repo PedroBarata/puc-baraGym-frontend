@@ -74,4 +74,11 @@ export class AtividadeService {
         `${environment.apiUrl}/usuarios/${matricula}/atividades/${usuarioAtividadeId}/alocacoes`
       )
   }
+
+  deletarAtividade(atividadeId: number): Observable<void>  {
+    return this.http
+    .delete<void>(
+      `${environment.apiUrl}/atividades/${atividadeId}`,
+    );
+  }
 }

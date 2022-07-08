@@ -36,4 +36,11 @@ export class AlocacaoService {
       );
   }
 
+  deletarAlocacao(alocacao: number) {
+    return this.http
+      .delete<void>(
+        `${environment.apiUrl}/alocacoes/${alocacao}`
+      );
+  }
+
 }

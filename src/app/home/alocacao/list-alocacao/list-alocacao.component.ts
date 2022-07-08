@@ -17,7 +17,8 @@ export class ListAlocacaoComponent implements OnInit {
       { titulo: "Turma", nomeCampo: "nomeTurma" },
       { titulo: "Início", nomeCampo: "horaInicio" },
       { titulo: "Término", nomeCampo: "horaFim" },
-      { titulo: "Dia da semana", nomeCampo: "nomeDiaSemana" }
+      { titulo: "Dia da semana", nomeCampo: "nomeDiaSemana" },
+      { titulo: "Opções", nomeCampo: "", isDelete: true }
     ],
     registrosPorPagina: 10
   }
@@ -33,5 +34,9 @@ export class ListAlocacaoComponent implements OnInit {
       return this.alocacaoService.obterAlocacoes({ page: pagination.page, pageSize: pagination.pageSize });
     }
     return this.alocacaoService.obterAlocacoes();
+  }
+
+  deletarAlocacao = (alocacao: ListAlocacao) => {
+    return this.alocacaoService.deletarAlocacao(alocacao.id!);
   }
 }

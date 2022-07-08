@@ -9,6 +9,11 @@
       <tr *ngFor="let item of paginacaoList?.content">
         <td *ngFor="let coluna of tableConfig.colunas">
           {{ coluna.isCurrency? (item[coluna.nomeCampo] | currency) : item[coluna.nomeCampo] }}
+
+          <div *ngIf="coluna.isDelete" class="ms-3">
+            <i class="fa-solid fa-circle-xmark text-primary" style="zoom: 1.9;cursor: pointer;"
+              (click)="onDeletaItem(item)"></i>
+          </div>
         </td>
       </tr>
     </tbody>

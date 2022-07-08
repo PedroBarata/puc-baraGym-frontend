@@ -14,7 +14,8 @@ export class ListAulaAtividadeComponent implements OnInit {
   configuracaoTable: DataTable = {
     colunas: [
       { titulo: "Nome", nomeCampo: "nome" },
-      { titulo: "Valor/Dia", nomeCampo: "valorDia", isCurrency: true }
+      { titulo: "Valor/Dia", nomeCampo: "valorDia", isCurrency: true },
+      { titulo: "Opções", nomeCampo: "", isDelete: true }
     ],
     registrosPorPagina: 10
   }
@@ -30,6 +31,11 @@ export class ListAulaAtividadeComponent implements OnInit {
       return this.atividadeService.obterTodasAtividades({ page: pagination.page, pageSize: pagination.pageSize });
     }
     return this.atividadeService.obterTodasAtividades();
+  }
+
+  deletarAtividade = (atividade: Atividade) => {
+    return this.atividadeService.deletarAtividade(atividade.id!);
+
   }
 
 }

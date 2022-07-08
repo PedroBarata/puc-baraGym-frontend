@@ -38,4 +38,11 @@ export class TurmaService {
         data
       );
   }
+
+  deletarTurma(turmaId: number): Observable<void> {
+    return this.http
+      .delete<void>(
+        `${environment.apiUrl}/turmas/${turmaId}`,
+      );
+  }
 }
