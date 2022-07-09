@@ -21,6 +21,9 @@ export class TablePaginationComponent implements OnInit, OnDestroy {
   public deletaLinha!: (item: any) => Observable<void>;
 
   @Input()
+  public editarItem!: (item: any) => any;
+
+  @Input()
   public dominio?: string;
 
   paginacaoList: Page<any> = new Page<any>();
@@ -150,6 +153,10 @@ export class TablePaginationComponent implements OnInit, OnDestroy {
           console.error(e);
         }
       });
+  }
+
+  public onEditItem(item: any) {
+    this.editarItem(item);
   }
 
 }

@@ -25,6 +25,13 @@ export class AlocacaoService {
       );
   }
 
+  obterAlocacao(alocacaoId: number) {
+    return this.http
+    .get<ListAlocacao>(
+      `${environment.apiUrl}/alocacoes/${alocacaoId}`
+    );
+  }
+
 
   cadastrarAlocacao(alocacao: CreateAlocacao) {
     const data: CreateAlocacao = { ...alocacao };
@@ -32,6 +39,17 @@ export class AlocacaoService {
     return this.http
       .post<Agendamento>(
         `${environment.apiUrl}/alocacoes`,
+        data
+      );
+  }
+
+  atualizarAlocacao(alocacao: CreateAlocacao, alocacaoId: number) {
+    const data: CreateAlocacao = { ...alocacao };
+    console.log(data);
+
+    return this.http
+      .put<CreateAlocacao>(
+        `${environment.apiUrl}/alocacoes/${alocacaoId}`,
         data
       );
   }

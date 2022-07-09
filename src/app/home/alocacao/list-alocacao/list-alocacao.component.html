@@ -2,5 +2,10 @@
 
 
 <div class="row">
-  <app-table-pagination [listaFuncao]="obterAlocacoes" [tableConfig]="configuracaoTable" [deletaLinha]="deletarAlocacao" dominio="Alocação"></app-table-pagination>
+  <app-table-pagination
+  [listaFuncao]="obterAlocacoes"
+  [tableConfig]="configuracaoTable"
+  [deletaLinha]="deletarAlocacao"
+  [editarItem]="editarAlocacao"
+  dominio="Alocação"></app-table-pagination>
 </div>

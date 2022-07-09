@@ -7,13 +7,15 @@ import { LoadButtonModule } from 'src/app/common/components/load-button/load-but
 import { AlocacaoRoutingModule } from './alocacao-routing.module';
 import { TablePaginationModule } from 'src/app/common/components/table-pagination/table-pagination.module';
 import { SubTitleModule } from 'src/app/common/components/sub-title/sub-title.module';
+import { EditAlocacaoComponent } from './edit-alocacao/edit-alocacao.component';
 
 
 
 @NgModule({
   declarations: [
     ListAlocacaoComponent,
-    CreateAlocacaoComponent
+    CreateAlocacaoComponent,
+    EditAlocacaoComponent
   ],
   imports: [
     CommonModule,

@@ -1,10 +1,15 @@
 export interface ListAlocacao {
   id?: number;
-  nomeAtividade: string;
-  nomeDiaSemana: string;
-  nomeTurma: string;
+  atividade: IdAndNome;
+  diaSemana: IdAndNome;
+  turma: IdAndNome;
   horaInicio: string;
   horaFim: string;
+}
+
+export interface IdAndNome {
+  id: number;
+  nome: string;
 }
 
 export interface CreateAlocacao {

@@ -8,10 +8,12 @@
     <tbody>
       <tr *ngFor="let item of paginacaoList?.content">
         <td *ngFor="let coluna of tableConfig.colunas">
-          {{ coluna.isCurrency? (item[coluna.nomeCampo] | currency) : item[coluna.nomeCampo] }}
+          {{ coluna.isCurrency? (item[coluna.nomeCampo] | currency) : coluna.isNameField? item[coluna.nomeCampo]['nome'] : item[coluna.nomeCampo]}}
 
-          <div *ngIf="coluna.isDelete" class="ms-3">
-            <i class="fa-solid fa-circle-xmark text-primary" style="zoom: 1.9;cursor: pointer;"
+          <div *ngIf="coluna.titulo === 'Opções'">
+            <i *ngIf="coluna.isEdit" class="fa-solid fa-pen-to-square text-primary me-2" style="zoom: 1.9;cursor: pointer;"
+              (click)="onEditItem(item)"></i>
+            <i *ngIf="coluna.isDelete" class="fa-solid fa-circle-xmark text-primary" style="zoom: 1.9;cursor: pointer;"
               (click)="onDeletaItem(item)"></i>
           </div>
         </td>
