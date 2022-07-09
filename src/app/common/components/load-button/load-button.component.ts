@@ -1,5 +1,5 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { FormGroup, NgForm } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { LoadingService } from 'src/app/services/loading.service';
 
@@ -10,7 +10,7 @@ import { LoadingService } from 'src/app/services/loading.service';
 })
 export class LoadButtonComponent implements OnInit {
   @Input() label: string = '';
-  @Input() form: NgForm | null = null;
+  @Input() form: NgForm | FormGroup | null = null;
   isLoading = this.loadingService.isLoading;
 
 

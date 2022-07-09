@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Atividade } from 'src/app/model/atividade.model';
 import { DataTable } from 'src/app/model/data-table.model';
 import { Page } from 'src/app/model/page.model';
@@ -15,13 +16,14 @@ export class ListAulaAtividadeComponent implements OnInit {
     colunas: [
       { titulo: "Nome", nomeCampo: "nome" },
       { titulo: "Valor/Dia", nomeCampo: "valorDia", isCurrency: true },
-      { titulo: "Opções", nomeCampo: "", isDelete: true }
+      { titulo: "Opções", nomeCampo: "", isDelete: true, isEdit: true }
     ],
     registrosPorPagina: 10
   }
 
 
-  constructor(private atividadeService: AtividadeService) { }
+  constructor(private atividadeService: AtividadeService,
+    private route: Router) { }
 
   ngOnInit(): void {
   }
@@ -35,7 +37,10 @@ export class ListAulaAtividadeComponent implements OnInit {
 
   deletarAtividade = (atividade: Atividade) => {
     return this.atividadeService.deletarAtividade(atividade.id!);
+  }
 
+  editarAtividade = (atividade: Atividade) => {
+    this.route.navigate(['/aula-atividade', atividade.id!]);
   }
 
 }

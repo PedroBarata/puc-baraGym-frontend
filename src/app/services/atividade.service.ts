@@ -37,6 +37,13 @@ export class AtividadeService {
       );
   }
 
+  obterAtividade(atividadeId: number) {
+    return this.http
+      .get<Atividade>(
+        `${environment.apiUrl}/atividades/${atividadeId}`
+      );
+  }
+
   cadastrarAtividade(nome: string, descricao: string, valorDia: number) {
     const data: Atividade = {
       nome: nome,
@@ -47,6 +54,20 @@ export class AtividadeService {
     return this.http
       .post<Atividade>(
         `${environment.apiUrl}/atividades`,
+        data
+      );
+  }
+
+  atualizarAtividade(nome: string, descricao: string, valorDia: number, atividadeId: number) {
+    const data: Atividade = {
+      nome: nome,
+      descricao: descricao,
+      valorDia: valorDia
+    };
+
+    return this.http
+      .put<Atividade>(
+        `${environment.apiUrl}/atividades/${atividadeId}`,
         data
       );
   }
@@ -75,10 +96,10 @@ export class AtividadeService {
       )
   }
 
-  deletarAtividade(atividadeId: number): Observable<void>  {
+  deletarAtividade(atividadeId: number): Observable<void> {
     return this.http
-    .delete<void>(
-      `${environment.apiUrl}/atividades/${atividadeId}`,
-    );
+      .delete<void>(
+        `${environment.apiUrl}/atividades/${atividadeId}`,
+      );
   }
 }
