@@ -26,6 +26,28 @@ export class TurmaService {
       );
   }
 
+  obterTurma(turmaId: number): Observable<Turma> {
+
+    return this.http
+      .get<Turma>(
+        `${environment.apiUrl}/turmas/${turmaId}`
+      );
+  }
+
+  atualizarTurmas(nome: string, capacidade: number, turmaId: number) {
+    const data: Turma = {
+      nome: nome,
+      capacidade: capacidade
+    }
+
+    return this.http
+      .put<Turma>(
+        `${environment.apiUrl}/turmas/${turmaId}`,
+        data
+      );
+  }
+
+
   cadastrarTurmas(nome: string, capacidade: number) {
     const data: Turma = {
       nome: nome,

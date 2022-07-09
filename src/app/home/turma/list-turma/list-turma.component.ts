@@ -16,13 +16,14 @@ export class ListTurmaComponent implements OnInit {
     colunas: [
       { titulo: "Nome", nomeCampo: "nome" },
       { titulo: "Capacidade", nomeCampo: "capacidade" },
-      { titulo: "Opções", nomeCampo: "", isDelete: true }
+      { titulo: "Opções", nomeCampo: "", isDelete: true, isEdit: true }
     ],
     registrosPorPagina: 10
   }
 
   constructor(
-    private turmaService: TurmaService
+    private turmaService: TurmaService,
+    private route: Router
   ) { }
 
 
@@ -40,4 +41,7 @@ export class ListTurmaComponent implements OnInit {
     return this.turmaService.deletarTurma(turma.id!);
   }
 
+  editarTurma = (turma: Turma) => {
+    this.route.navigate(['/turmas', turma.id!]);
+  }
 }
